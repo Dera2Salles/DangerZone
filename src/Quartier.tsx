@@ -2,8 +2,10 @@ import { AlertTriangleIcon, ShieldCheckIcon, Skull } from 'lucide-react';
 import type { DangerEntity } from './danger/danger.entity';
 import { useState } from 'react';
 import { Button } from './components/ui/button';
+import { useDangerContext } from './useDangerContext';
 
 export const Quartier = ({ item }: { item: DangerEntity }) => {
+  const { danger, warning, safe } = useDangerContext();
   const [dangerNumber, setDangerNumber] = useState<number>(
     item.dangerLevel.number,
   );
@@ -25,7 +27,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
   );
 
   // Fonction pour gérer le clic sur un niveau
-  const handleLevelClick = (level: 'danger' | 'warning' | 'safe') => {
+  const handleLevelClick = async (level: 'danger' | 'warning' | 'safe') => {
     if (activeLevel === level) {
       // Déselectionner le niveau actuel
       setActiveLevel(null);
@@ -62,12 +64,15 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
       switch (level) {
         case 'danger':
           setDangerNumber((prev) => prev + 1);
+          await danger(item.id as string);
           break;
         case 'warning':
           setWarningNumber((prev) => prev + 1);
+          await warning(item.id as string);
           break;
         case 'safe':
           setSafeNumber((prev) => prev + 1);
+          await safe(item.id as string);
           break;
       }
     }

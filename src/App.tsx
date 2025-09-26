@@ -1,7 +1,8 @@
 import { Quartier } from './Quartier';
 import type { DangerEntity } from './danger/danger.entity';
 import Description from './Description';
-import { Accueil } from './Accueil';
+import { useDangerContext } from './useDangerContext';
+
 const fakeData: DangerEntity[] = [
   {
     dangerLevel: {
@@ -52,13 +53,14 @@ const fakeData: DangerEntity[] = [
 ];
 
 const App = () => {
+  const { list } = useDangerContext();
   return (
     <div className=" bg-zinc-100 h-screen overflow-x-hidden">
       <div className="flex flex-col pt-10">
         <Accueil />
         <Description />
-        {fakeData.map((item) => (
-          <Quartier item={item} />
+        {list.map((item, key) => (
+          <Quartier item={item} key={key} />
         ))}
       </div>
     </div>
