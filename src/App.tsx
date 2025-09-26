@@ -1,7 +1,7 @@
 import { Quartier } from './Quartier';
 import type { DangerEntity } from './danger/danger.entity';
 import Description from './Description';
-
+import { Accueil } from './Accueil';
 const fakeData: DangerEntity[] = [
   {
     dangerLevel: {
@@ -55,6 +55,7 @@ const App = () => {
   return (
     <div className=" bg-zinc-100 h-screen overflow-x-hidden">
       <div className="flex flex-col pt-10">
+        <Accueil />
         <Description />
         {fakeData.map((item) => (
           <Quartier item={item} />
