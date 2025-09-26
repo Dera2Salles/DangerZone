@@ -29,7 +29,9 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
         <h2 className="font-semibold text-3xl ">{item.quartierName}</h2>
         <div className="flex gap-2 text-white">
           <Button
-            disabled={item.dangerLevel.isFingerPrint}
+            disabled={
+              item.dangerLevel.isFingerPrint || item.warningLevel.isFingerPrint
+            }
             onClick={
               isSafeCliked
                 ? () => {
@@ -46,7 +48,9 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
             <ShieldCheckIcon />: <p className="text-white">{safeNumber}</p>
           </Button>
           <Button
-            disabled={item.dangerLevel.isFingerPrint}
+            disabled={
+              item.safeLevel.isFingerPrint || item.dangerLevel.isFingerPrint
+            }
             onClick={
               isWarningCliked
                 ? () => {
