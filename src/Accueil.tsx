@@ -1,7 +1,7 @@
 import image_genZ from "./asset/GenZ.jpg"
 export const Accueil= ()=> {
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white border-2 rounded-lg">
+    <div className="max-w-2xl mx-auto p-6 ">
       <div className="flex flex-col items-center text-center">
         <div className="w-48 h-48 mb-6">
           <img 

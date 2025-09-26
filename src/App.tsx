@@ -54,15 +54,18 @@ const fakeData: DangerEntity[] = [
 ];
 
 const App = () => {
-  const { list } = useDangerContext();
+  const { list }   = useDangerContext();
   return (
-    <div className=" bg-zinc-100 h-screen overflow-x-hidden">
-      <div className="flex flex-col pt-10">
+    <div className=" bg-zinc-100 flex-wrap h-screen overflow-x-hidden">
+      <div className="flex flex-wrap pt-10 items-center">
         <Accueil />
         <Description />
-        {list.map((item, key) => (
-          <Quartier item={item} key={key} />
-        ))}
+        <div className='flex flex-col i'>
+        <h2 className='font-bold text-2xl text-center pt-10 m-4'>Quartier</h2>
+        <div className='flex w-screen items-center justify-center flex-wrap flex-col lg:flex-row'>{fakeData.map((item, key) => (
+        <Quartier item={item} key={key} />
+        ))}</div>
+        </div>
       </div>
     </div>
   );
