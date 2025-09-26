@@ -10,7 +10,7 @@ interface Quartier {
 export const Quartier = () => {
   return (
     <div className="w-full md:w-1/2 bg-card  text-card-foreground items-center justify-between  flex flex-col gap-10 rounded-4xl border-4 py-5 px-5 shadow-2xs">
-      <p>Sabotsy Namehana</p>
+      <p className='font-semibold text-3xl'>Sabotsy Namehana</p>
       <div className=" flex">
         <Skull className=" text-red-600" />
         <AlertTriangleIcon className="text-yellow-500" />
