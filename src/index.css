@@ -120,3 +120,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+#dangerLevel{
+  color: red;
+}
+#warninglevel{
+  color: yellow;
+}
+#safeNumber{
+  color: green;
+}
