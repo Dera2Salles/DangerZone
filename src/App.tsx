@@ -2,6 +2,7 @@ import { Quartier } from './Quartier';
 import type { DangerEntity } from './danger/danger.entity';
 import Description from './Description';
 import { useDangerContext } from './useDangerContext';
+import { Accueil } from './Accueil';
 
 const fakeData: DangerEntity[] = [
   {
