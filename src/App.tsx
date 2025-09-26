@@ -18,15 +18,48 @@ const fakeData: DangerEntity[] = [
       isFingerPrint: false,
     },
   },
+  {
+    dangerLevel: {
+      number: 53,
+      isFingerPrint: false,
+    },
+    quartierName: 'ITAOSY-UNIS',
+    safeLevel: {
+      number: 9,
+      isFingerPrint: true,
+    },
+    warningLevel: {
+      number: 132,
+      isFingerPrint: false,
+    },
+  },
+
+  {
+    dangerLevel: {
+      number: 153,
+      isFingerPrint: false,
+    },
+    quartierName: 'ANDAVAMAMBA',
+    safeLevel: {
+      number: 19,
+      isFingerPrint: false,
+    },
+    warningLevel: {
+      number: 12,
+      isFingerPrint: true,
+    },
+  },
 ];
 
 const App = () => {
   return (
-    <div className=" bg-zinc-100 h-full overflow-x-hidden">
-      <Description />
-      {fakeData.map((item) => (
-        <Quartier item={item} />
-      ))}
+    <div className=" bg-zinc-100 h-screen overflow-x-hidden">
+      <div className="flex flex-col pt-10">
+        <Description />
+        {fakeData.map((item) => (
+          <Quartier item={item} />
+        ))}
+      </div>
     </div>
   );
 };

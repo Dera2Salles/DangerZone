@@ -24,14 +24,14 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
   );
 
   return (
-    <div className="flex flex-col gap-5 h-screen w-screen justify-center items-center">
+    <div className="flex flex-col gap-5 justify-center items-center">
       <div className="flex gap-5 flex-col border-4 border-gray-600 rounded-2xl m-2 p-4">
         <h2 className="font-semibold text-3xl ">{item.quartierName}</h2>
-        <div className="flex gap-2 ">
+        <div className="flex gap-2 text-white">
           <Button
             disabled={item.dangerLevel.isFingerPrint}
             onClick={
-              isSafeCliked || item.safeLevel.isFingerPrint
+              isSafeCliked
                 ? () => {
                     setSafeNumber((value) => value - 1);
                     setisSafeClicked((value) => !value);
@@ -41,9 +41,9 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
                     setisSafeClicked((value) => !value);
                   }
             }
-            className="flex cursor-pointer "
+            className="flex cursor-pointer"
           >
-            <ShieldCheckIcon />: <p className="text-black">{safeNumber}</p>
+            <ShieldCheckIcon />: <p className="text-white">{safeNumber}</p>
           </Button>
           <Button
             disabled={item.dangerLevel.isFingerPrint}
@@ -60,7 +60,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
             }
             className="flex cursor-pointer "
           >
-            <AlertTriangleIcon />: <p className="text-black">{warningNumber}</p>
+            <AlertTriangleIcon />: <p className="text-white">{warningNumber}</p>
           </Button>
           <Button
             disabled={
@@ -79,7 +79,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
             }
             className="flex cursor-pointer "
           >
-            <Skull />: <p className="text-black">{dangerNumber}</p>
+            <Skull />: <p className="text-white">{dangerNumber}</p>
           </Button>
         </div>
       </div>
