@@ -12,7 +12,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
   const [warningNumber, setWarningNumber] = useState<number>(
     item.warningLevel.number,
   );
-  const [safeNumber, setSafeNumber] = useState<number>(item.safeLevel.number); // Correction: item.safeLevel.number
+  const [safeNumber, setSafeNumber] = useState<number>(item.safeLevel.number); 
 
   const [activeLevel, setActiveLevel] = useState<
     'danger' | 'warning' | 'safe' | null
@@ -26,12 +26,10 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
       : null,
   );
 
-  // Fonction pour gérer le clic sur un niveau
   const handleLevelClick = async (level: 'danger' | 'warning' | 'safe') => {
     if (activeLevel === level) {
-      // Déselectionner le niveau actuel
       setActiveLevel(null);
-      // Décrémenter le compteur du niveau désélectionné
+
       switch (level) {
         case 'danger':
           setDangerNumber((prev) => prev - 1);
@@ -44,7 +42,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
           break;
       }
     } else {
-      // Si un niveau était déjà sélectionné, le décrémenter d'abord
+
       if (activeLevel) {
         switch (activeLevel) {
           case 'danger':
@@ -59,7 +57,6 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
         }
       }
 
-      // Sélectionner le nouveau niveau et l'incrémenter
       setActiveLevel(level);
       switch (level) {
         case 'danger':
@@ -78,17 +75,14 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
     }
   };
 
-  // Vérifier si un bouton est désactivé (un autre niveau est déjà sélectionné)
   const isButtonDisabled = (level: 'danger' | 'warning' | 'safe') => {
     return activeLevel !== null && activeLevel !== level;
   };
 
   return (
-    <div className="flex flex-col gap-5 justify-center items-center">
-      <div className="flex gap-5 flex-col border-4 border-gray-600 rounded-2xl m-2 p-4">
+      <div className="flex lg:w-1/4 w-max flex-col gap-5 shadow-sm bg-white m-5 p-5 rounded-lg">
         <h2 className="font-semibold text-3xl">{item.quartierName}</h2>
         <div className="flex gap-2 text-white">
-          {/* Bouton Safe */}
           <Button
             disabled={isButtonDisabled('safe')}
             onClick={() => handleLevelClick('safe')}
@@ -99,7 +93,6 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
             <ShieldCheckIcon />: <p className="text-white">{safeNumber}</p>
           </Button>
 
-          {/* Bouton Warning */}
           <Button
             disabled={isButtonDisabled('warning')}
             onClick={() => handleLevelClick('warning')}
@@ -109,8 +102,6 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
           >
             <AlertTriangleIcon />: <p className="text-white">{warningNumber}</p>
           </Button>
-
-          {/* Bouton Danger */}
           <Button
             disabled={isButtonDisabled('danger')}
             onClick={() => handleLevelClick('danger')}
@@ -122,6 +113,5 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
           </Button>
         </div>
       </div>
-    </div>
   );
 };
