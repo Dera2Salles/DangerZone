@@ -20,9 +20,9 @@ export const Quartier = () => {
   ]
   
   const [levels,setLevels] = useState<Level[]>([
-    { id: "dangerLevel", icon:<AlertTriangleIcon/>, count: 0},
-    { id: "warninglevel", icon:<ShieldCheckIcon/>, count: 0},
-    { id: "safeNumber", icon:<Skull/>, count: 0}
+    { id: "safeNumber", icon: <ShieldCheckIcon/>,count: 0},
+    { id: "warninglevel", icon:<AlertTriangleIcon/>, count: 0},
+    {id: "dangerLevel", icon:<Skull/>, count: 0 }
   ])
   const handleClick = (id:string) => {
     setLevels(prev => prev.map(level => level.id === id ? {...level, count: level.count + 1} : level));
