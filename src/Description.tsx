@@ -1,22 +1,24 @@
-import { AlertTriangle, Shield, Skull } from 'lucide-react';
+import Danger from '@/asset/alarm.png';
+import Safe from '@/asset/insurance.png'
+import Warning from '@/asset/warning.png'
 
 export default function Description() {
   const categories = [
     {
       title: "Faritra Mena",
-      icon: Skull,
+      icon: Danger,
       iconColor: "text-red-600",
       description: "Korotana, Lalana tapaka, Feno Mpandroba, Vono olona..."
     },
     {
       title: "Faritra Mavo",
-      icon: AlertTriangle,
+      icon: Warning,
       iconColor: "text-yellow-500",
       description: "Korotana, lalana tapaka..."
     },
     {
       title: "Faritra Maintso",
-      icon: Shield,
+      icon: Safe,
       iconColor: "text-green-500", 
       description: "Lavitra ny fitokonana sy ny fandrobana, tsy misy ataorana"
     }
@@ -34,7 +36,7 @@ export default function Description() {
           return (
             <div key={index} className="bg-white rounded-lg shadow-md p-4 text-center">
               <div className={`${category.iconColor} mb-3 flex justify-center`}>
-                <IconComponent size={40} />
+                <img src={IconComponent} className='h-40 w-40' />
               </div>
               <h2 className="text-lg font-semibold mb-3 text-black">
                 {category.title}
