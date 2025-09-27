@@ -1,4 +1,7 @@
-import { AlertTriangleIcon, ShieldCheckIcon, Skull } from 'lucide-react';
+import Icon from '@/asset/infrastructure.png'
+import Danger from '@/asset/alarm.png';
+import Safe from '@/asset/insurance.png'
+import Warning from '@/asset/warning.png'
 import type { DangerEntity } from './danger/danger.entity';
 import { useState } from 'react';
 import { Button } from './components/ui/button';
@@ -80,9 +83,9 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
   };
 
   return (
-      <div className="flex lg:w-1/4 w-max flex-col gap-5 shadow-sm bg-white m-5 p-5 rounded-lg">
-        <h2 className="font-semibold text-3xl">{item.quartierName}</h2>
-        <div className="flex gap-2 text-white">
+      <div className="flex lg:w-1/4 w-max flex-col gap-5 shadow-md bg-white m-5 p-5 rounded-lg">
+        <div className='flex justify-center '><img src={Icon} className='h-10 w-10 mx-2 rounded-full' alt="" /> <h2 className="font-semibold text-3xl">{item.quartierName}</h2></div>
+        <div className="flex justify-center gap-2 text-white">
           <Button
             disabled={isButtonDisabled('safe')}
             onClick={() => handleLevelClick('safe')}
@@ -90,7 +93,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
               activeLevel === 'safe' ? 'bg-green-600' : 'bg-gray-600'
             }`}
           >
-            <ShieldCheckIcon />: <p className="text-white">{safeNumber}</p>
+            <img src={Safe} className='h-5 w-5' alt="" />: <p className="text-white">{safeNumber}</p>
           </Button>
 
           <Button
@@ -100,7 +103,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
               activeLevel === 'warning' ? 'bg-yellow-600' : 'bg-gray-600'
             }`}
           >
-            <AlertTriangleIcon />: <p className="text-white">{warningNumber}</p>
+            <img src={Warning} className='h-5 w-5' alt="" />: <p className="text-white">{warningNumber}</p>
           </Button>
           <Button
             disabled={isButtonDisabled('danger')}
@@ -109,7 +112,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
               activeLevel === 'danger' ? 'bg-red-600' : 'bg-gray-600'
             }`}
           >
-            <Skull />: <p className="text-white">{dangerNumber}</p>
+          <img src={Danger} className='h-5 w-5' alt="" />: <p className="text-white">{dangerNumber}</p>
           </Button>
         </div>
       </div>
