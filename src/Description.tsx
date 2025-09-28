@@ -1,6 +1,6 @@
-import Danger from '@/asset/alarm.png';
-import Safe from '@/asset/insurance.png'
-import Warning from '@/asset/warning.png'
+import Danger from '@/asset/danger(1).png';
+import Safe from '@/asset/shield(1).png'
+import Warning from '@/asset/exclamation.png'
 
 export default function Description() {
   const categories = [
