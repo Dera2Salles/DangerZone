@@ -93,7 +93,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
               activeLevel === 'safe' ? 'bg-green-600' : 'bg-gray-600'
             }`}
           >
-            <img src={Safe} className='h-5 w-5' alt="" />: <p className="text-white">{safeNumber}</p>
+            <img src={Safe} className='h-5 w-5' alt="" /> <p className="text-white">{safeNumber}</p>
           </Button>
 
           <Button
@@ -103,7 +103,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
               activeLevel === 'warning' ? 'bg-yellow-600' : 'bg-gray-600'
             }`}
           >
-            <img src={Warning} className='h-5 w-5' alt="" />: <p className="text-white">{warningNumber}</p>
+            <img src={Warning} className='h-5 w-5' alt="" /> <p className="text-white">{warningNumber}</p>
           </Button>
           <Button
             disabled={isButtonDisabled('danger')}
@@ -112,7 +112,7 @@ export const Quartier = ({ item }: { item: DangerEntity }) => {
               activeLevel === 'danger' ? 'bg-red-600' : 'bg-gray-600'
             }`}
           >
-          <img src={Danger} className='h-5 w-5' alt="" />: <p className="text-white">{dangerNumber}</p>
+          <img src={Danger} className='h-5 w-5' alt="" /> <p className="text-white">{dangerNumber}</p>
           </Button>
         </div>
       </div>
