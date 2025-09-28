@@ -61,7 +61,7 @@ const App = () => {
         <Accueil />
         <Description />
         <div className='flex flex-col i'>
-        <h2 className='font-bold text-2xl text-center pt-10 m-4'>Quartier</h2>
+        <h2 className='font-bold text-2xl text-center pt-10 m-4'>Fokotany</h2>
         <div className='flex w-screen items-center justify-center flex-wrap flex-col lg:flex-row'>{fakeData.map((item, key) => (
         <Quartier item={item} key={key} />
         ))}</div>
