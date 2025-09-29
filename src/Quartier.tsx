@@ -1,7 +1,7 @@
-import Icon from '@/asset/infrastructure.png'
-import Danger from '@/asset/alarm.png';
-import Safe from '@/asset/insurance.png'
-import Warning from '@/asset/warning.png'
+import Icon from '@/asset/placeholder.png'
+import Danger from '@/asset/danger(1).png';
+import Safe from '@/asset/shield(1).png'
+import Warning from '@/asset/exclamation.png'
 import type { DangerEntity } from './danger/danger.entity';
 import { useState } from 'react';
 import { Button } from './components/ui/button';
