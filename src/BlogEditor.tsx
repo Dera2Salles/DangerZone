@@ -35,6 +35,7 @@ interface BlogEditorProps {
   placeholder?: string;
   autoSave?: boolean;
   onSave?: () => void;
+  onImageUpload?: (file: File) => Promise<string>;
 }
 
 function BlogEditorContent({
@@ -43,6 +44,7 @@ function BlogEditorContent({
   placeholder = 'Commencez à écrire votre article...',
   autoSave = true,
   onSave,
+  onImageUpload,
 }: BlogEditorProps) {
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
@@ -53,6 +55,7 @@ function BlogEditorContent({
   const [customColor, setCustomColor] = useState('#000000');
   const [lineHeight, setLineHeight] = useState('1.5');
   const { theme } = useTheme();
+  const [isUploading, setIsUploading] = useState(false);
 
   const editor = useEditor({
     extensions: [
@@ -222,10 +225,40 @@ function BlogEditorContent({
       .run();
   };
 
-  const addImage = () => {
-    const url = window.prompt("URL de l'image:");
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
+  const addImage = async (file?: File) => {
+    if (file) {
+      setIsUploading(true);
+      try {
+        let imageUrl: string;
+        
+        if (onImageUpload) {
+          imageUrl = await onImageUpload(file);
+        } else {
+          imageUrl = await new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+          });
+        }
+        
+        editor?.chain().focus().setImage({ 
+          src: imageUrl,
+          alt: file.name,
+          title: file.name 
+        }).run();
+        
+      } catch (error) {
+        console.error('Erreur lors du chargement de l\'image:', error);
+        alert('Erreur lors du chargement de l\'image');
+      } finally {
+        setIsUploading(false);
+      }
+    } else {
+      const url = window.prompt("URL de l'image (optionnel):");
+      if (url) {
+        editor?.chain().focus().setImage({ src: url }).run();
+      }
     }
   };
 
@@ -311,6 +344,22 @@ function BlogEditorContent({
               onClearFormatting={clearFormatting}
             />
           </>
+        )}
+
+        {isUploading && (
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
+              <div className="flex flex-col items-center gap-4">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                <p className="text-gray-700 dark:text-gray-300 font-medium">
+                  Chargement de l'image...
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Veuillez patienter
+                </p>
+              </div>
+            </div>
+          </div>
         )}
 
         <div className="relative">
