@@ -2,14 +2,15 @@
 
 # === CONFIGURATION FIXE ===
 AP_BSSID="CC:2D:21:E1:B1:59"
-INTERFACE="wlan0mon"
-CANAL=9
+INTERFACE="wlan1"
+CANAL=8
 # === MAC AUTORISÉES (NE JAMAIS ÉJECTER) ===
 AUTORISES=(
-    "28:E3:47:6B:D5:C9" # ← TON PC (le tien)
+    "fe:44:3e:c4:1d:c8" # ← TON PC (le tien)
     "28:C2:DD:42:CF:15"
     "00:E0:23:30:F2:43"
-
+    "BE:31:00:73:D4:5D"
+     
 )
 INTRUS_FILE="intrus_permanents.txt"
 # ==================================
