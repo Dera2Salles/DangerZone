@@ -23,11 +23,11 @@ import TextAlign from '@tiptap/extension-text-align';
 import { TextStyle } from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
 
-import { Header } from './Header';
-import { Toolbar } from './Toolbar';
-import { StatusBar } from './StatusBar';
 import { EditorMenus } from './EditorMenus';
+import { Header } from './Header';
+import { StatusBar } from './StatusBar';
 import { ThemeProvider, useTheme } from './ThemeContext';
+import { Toolbar } from './Toolbar';
 
 interface BlogEditorProps {
   content: string;
@@ -62,7 +62,6 @@ function BlogEditorContent({
       StarterKit.configure({
         heading: { levels: [1, 2, 3, 4, 5, 6] },
         code: false,
-        strike: false,
       }),
       TextStyle,
       Color,
