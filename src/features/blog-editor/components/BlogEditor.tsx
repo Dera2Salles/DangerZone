@@ -23,6 +23,45 @@ import TextAlign from '@tiptap/extension-text-align';
 import { TextStyle } from '@tiptap/extension-text-style';
 import Underline from '@tiptap/extension-underline';
 
+// Extension personnalisée pour la taille de police car elle n'est pas dans le kit de base
+const FontSize = TextStyle.extend({
+  addAttributes() {
+    return {
+      fontSize: {
+        default: null,
+        parseHTML: (element: HTMLElement) => element.style.fontSize,
+        renderHTML: (attributes: Record<string, any>) => {
+          if (!attributes.fontSize) {
+            return {};
+          }
+          return {
+            style: `font-size: ${attributes.fontSize}`,
+          };
+        },
+      },
+    };
+  },
+});
+
+const CustomTextAlign = TextAlign.extend({
+  addAttributes() {
+    return {
+      textAlign: {
+        default: 'left',
+        parseHTML: (element: HTMLElement) => element.style.textAlign || 'left',
+        renderHTML: (attributes: Record<string, any>) => {
+          if (attributes.textAlign === 'left') {
+            return {};
+          }
+          return {
+            style: `text-align: ${attributes.textAlign}`,
+          };
+        },
+      },
+    };
+  },
+});
+
 import { EditorMenus } from './EditorMenus';
 import { Header } from './Header';
 import { StatusBar } from './StatusBar';
@@ -62,17 +101,24 @@ function BlogEditorContent({
       StarterKit.configure({
         heading: { levels: [1, 2, 3, 4, 5, 6] },
         code: false,
+        bulletList: {
+          keepMarks: true,
+          keepAttributes: false,
+        },
+        orderedList: {
+          keepMarks: true,
+          keepAttributes: false,
+        },
       }),
-      TextStyle,
+      FontSize,
       Color,
       Underline,
       Highlight.configure({ multicolor: true }),
       Subscript,
       Superscript,
       Placeholder.configure({ placeholder }),
-      TextAlign.configure({
+      CustomTextAlign.configure({
         types: ['heading', 'paragraph', 'image'],
-        alignments: ['left', 'center', 'right', 'justify'],
       }),
       Link.configure({
         openOnClick: true,
@@ -84,15 +130,13 @@ function BlogEditorContent({
       TaskList,
       TaskItem.configure({
         nested: true,
-        HTMLAttributes: {
-          class: 'flex items-start my-2',
-        },
       }),
       Image.configure({
         inline: true,
         allowBase64: true,
         HTMLAttributes: {
           class: 'rounded-lg max-w-full h-auto',
+          style: 'max-width: 100%; height: auto; border-radius: 8px;',
         },
       }),
       TableKit.configure({
@@ -122,7 +166,7 @@ function BlogEditorContent({
     },
     editorProps: {
       attributes: {
-        class: `prose prose-lg focus:outline-none min-h-[500px] p-6 dark:prose-invert ${
+        class: `prose content-area prose-lg focus:outline-none min-h-[500px] p-6 dark:prose-invert ${
           theme === 'dark' ? 'dark' : ''
         }`,
         style: `line-height: ${lineHeight};`,

@@ -4,24 +4,24 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { getWordPressConfig, isWordPressConfigured } from '@/config/wordpress.config';
 import { useWordPress } from '@/hooks/useWordPress';
 import {
-    AlertCircle,
-    Calendar,
-    CheckCircle2,
-    Eye,
-    Loader2,
-    Save,
-    Tag,
-    Upload
+  AlertCircle,
+  Calendar,
+  CheckCircle2,
+  Eye,
+  Loader2,
+  Save,
+  Tag,
+  Upload
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -244,19 +244,34 @@ export function CreateBlogPost() {
                 padding: 2rem;
                 line-height: 1.6;
                 color: #112a41;
+                background-color: #ffffff;
               }
-              h1 { margin-bottom: 0.5rem; color: #288279; }
-              .excerpt { color: #799F9C; font-style: italic; margin-bottom: 2rem; }
+              h1 { margin-bottom: 0.5rem; color: #288279; border-bottom: 2px solid #C4ECEA; padding-bottom: 0.5rem; }
+              .excerpt { color: #799F9C; font-style: italic; margin-bottom: 2rem; border-left: 4px solid #34b5ab; padding-left: 1rem; }
               .content { margin-top: 2rem; }
-              img { max-width: 100%; height: auto; border-radius: 8px; }
-              a { color: #34b5ab; }
+              
+              /* List Styles */
+              ul { list-style-type: disc !important; padding-left: 1.5em !important; margin: 1em 0 !important; }
+              ol { list-style-type: decimal !important; padding-left: 1.5em !important; margin: 1em 0 !important; }
+              
+              /* Content Styles */
+              img { max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+              a { color: #288279; text-decoration: underline; }
+              blockquote { border-left: 4px solid #288279; background: #C4ECEA/20; padding: 1rem; margin: 1.5rem 0; font-style: italic; border-radius: 0 8px 8px 0; }
+              code { background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; }
+              pre { background: #111827; color: white; padding: 1rem; border-radius: 8px; overflow-x: auto; }
+              
+              /* Alignment */
+              [style*="text-align: right"] { text-align: right; }
+              [style*="text-align: center"] { text-align: center; }
+              [style*="text-align: justify"] { text-align: justify; }
             </style>
           </head>
           <body>
             <h1>${title || 'Untitled'}</h1>
             ${excerpt ? `<p class="excerpt">${excerpt}</p>` : ''}
             ${featuredImage ? `<img src="${featuredImage}" alt="Featured image" />` : ''}
-            <div class="content">${content}</div>
+            <div class="content prose content-area">${content}</div>
           </body>
         </html>
       `);
