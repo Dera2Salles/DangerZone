@@ -23,9 +23,9 @@ import {
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { BlogEditor } from './BlogEditor';
-import { getWordPressConfig, isWordPressConfigured } from './config/wordpress.config';
-import { useWordPress } from './hooks/useWordPress';
+import { BlogEditor } from './components/BlogEditor';
+import { getWordPressConfig, isWordPressConfigured } from '@/config/wordpress.config';
+import { useWordPress } from '@/hooks/useWordPress';
 
 export function CreateBlogPost() {
   const [title, setTitle] = useState('');

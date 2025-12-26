@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { WordPressService, createWordPressService } from '../services/wordpress.service';
+import { WordPressService, createWordPressService } from '@/services/wordpress';
 import type {
     CreatePostParams,
     UpdatePostParams,
@@ -8,7 +8,7 @@ import type {
     WordPressConfig,
     WordPressPost,
     WordPressTag,
-} from '../services/wordpress.types';
+} from '@/services/wordpress';
 
 interface UseWordPressOptions {
   config: WordPressConfig;

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { BlogList } from './BlogList';
-import { BlogPost } from './BlogPost';
-import { getWordPressConfig } from './config/wordpress.config';
-import { createWordPressService } from './services/wordpress.service';
-import type { WordPressCategory, WordPressPost } from './services/wordpress.types';
+import { getWordPressConfig } from '../../config/wordpress.config';
+import type { WordPressCategory, WordPressPost } from '../../services/wordpress';
+import { createWordPressService } from '../../services/wordpress';
+import { BlogList } from './components/BlogList';
+import { BlogPost } from './components/BlogPost';
 
 export function BlogViewer() {
   const [posts, setPosts] = useState<WordPressPost[]>([]);

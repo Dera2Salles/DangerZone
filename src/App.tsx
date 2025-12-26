@@ -2,8 +2,8 @@ import { Button } from '@/components/ui/button';
 import { BookOpen, PenSquare } from 'lucide-react';
 import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { BlogViewer } from './BlogViewer';
-import { CreateBlogPost } from './CreateBlogPost';
+import { CreateBlogPost } from './features/blog-editor';
+import { BlogViewer } from './features/blog-viewer';
 
 function App() {
   const [activeView, setActiveView] = useState<'viewer' | 'editor'>('viewer');
