@@ -20,7 +20,7 @@ export function StatusBar({
   const currentSize = parseInt(fontSize.replace('px', ''));
 
   return (
-    <div className="flex flex-wrap items-center justify-between p-2 border-t bg-gray-50 dark:bg-gray-800 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400">
+    <div className="flex flex-wrap items-center justify-between p-2 border-t bg-brand-mint/5 dark:bg-brand-primary-navy/40 dark:border-brand-primary/30 text-xs text-brand-secondary dark:text-brand-secondary/80">
       <div className="flex items-center gap-4">
         <span className="flex items-center gap-1">
           <HelpCircle className="h-3 w-3" />

@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button';
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -15,34 +15,34 @@ import { Toggle } from '@/components/ui/toggle';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Editor } from '@tiptap/react';
 import {
-    AlignCenter,
-    AlignLeft,
-    AlignRight,
-    Bold,
-    CheckSquare,
-    ChevronDown,
-    Code,
-    Eraser,
-    Type as FontSizeIcon,
-    GripVertical,
-    Highlighter,
-    Image as ImageIcon,
-    Italic,
-    Link as LinkIcon,
-    List,
-    ListOrdered,
-    Minus,
-    Paintbrush,
-    PaintBucket,
-    Pilcrow,
-    Quote,
-    Sparkles,
-    Strikethrough,
-    Subscript as SubscriptIcon,
-    Superscript as SuperscriptIcon,
-    Table as TableIcon,
-    Type,
-    Underline as UnderlineIcon,
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
+  Bold,
+  CheckSquare,
+  ChevronDown,
+  Code,
+  Eraser,
+  Type as FontSizeIcon,
+  GripVertical,
+  Highlighter,
+  Image as ImageIcon,
+  Italic,
+  Link as LinkIcon,
+  List,
+  ListOrdered,
+  Minus,
+  Paintbrush,
+  PaintBucket,
+  Pilcrow,
+  Quote,
+  Sparkles,
+  Strikethrough,
+  Subscript as SubscriptIcon,
+  Superscript as SuperscriptIcon,
+  Table as TableIcon,
+  Type,
+  Underline as UnderlineIcon,
 } from 'lucide-react';
 import React, { useRef } from 'react';
 
@@ -218,7 +218,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('bold')}
                 onPressedChange={() => editor.chain().focus().toggleBold().run()}
-                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
+                className="h-8 w-8 data-[state=on]:bg-primary/10 dark:data-[state=on]:bg-primary/50"
               >
                 <Bold className="h-4 w-4" />
               </Toggle>
@@ -232,7 +232,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('italic')}
                 onPressedChange={() => editor.chain().focus().toggleItalic().run()}
-                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
+                className="h-8 w-8 data-[state=on]:bg-primary/10 dark:data-[state=on]:bg-primary/50"
               >
                 <Italic className="h-4 w-4" />
               </Toggle>
@@ -246,7 +246,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('underline')}
                 onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
-                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
+                className="h-8 w-8 data-[state=on]:bg-primary/10 dark:data-[state=on]:bg-primary/50"
               >
                 <UnderlineIcon className="h-4 w-4" />
               </Toggle>
@@ -260,7 +260,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('strike')}
                 onPressedChange={() => editor.chain().focus().toggleStrike().run()}
-                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
+                className="h-8 w-8 data-[state=on]:bg-primary/10 dark:data-[state=on]:bg-primary/50"
               >
                 <Strikethrough className="h-4 w-4" />
               </Toggle>
@@ -276,7 +276,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('superscript')}
                 onPressedChange={() => editor.chain().focus().toggleSuperscript().run()}
-                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
+                className="h-8 w-8 data-[state=on]:bg-primary/10 dark:data-[state=on]:bg-primary/50"
               >
                 <SuperscriptIcon className="h-4 w-4" />
               </Toggle>
@@ -290,7 +290,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('subscript')}
                 onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
-                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
+                className="h-8 w-8 data-[state=on]:bg-primary/10 dark:data-[state=on]:bg-primary/50"
               >
                 <SubscriptIcon className="h-4 w-4" />
               </Toggle>

@@ -306,7 +306,7 @@ function BlogEditorContent({
   return (
     <TooltipProvider>
       <div
-        className={`blog-editor-container border rounded-xl overflow-hidden bg-white dark:bg-gray-900 shadow-lg transition-all duration-300 ${
+        className={`blog-editor-container border rounded-xl overflow-hidden bg-card shadow-lg transition-all duration-300 ${
           isFullscreen ? 'fixed inset-0 z-50 m-0 flex flex-col' : ''
         }`}
       >
@@ -372,7 +372,7 @@ function BlogEditorContent({
               {Array.from({ length: 30 }).map((_, i) => (
                 <div
                   key={i}
-                  className="border-t border-brand-mint/20 dark:border-brand-primary/20"
+                  className="border-t border-brand-mint/10 dark:border-brand-primary-navy/10"
                   style={{ height: `${parseInt(lineHeight) * 24}px` }}
                 />
               ))}

@@ -28,9 +28,9 @@ export function EditorMenus({
     <>
       <FloatingMenu
         editor={editor}
-        className="flex flex-col gap-1 p-2 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-xl"
+        className="flex flex-col gap-1 p-2 bg-popover border dark:border-brand-primary/30 rounded-lg shadow-xl"
       >
-        <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">
+        <div className="text-xs font-medium text-brand-secondary dark:text-brand-mint/60 mb-1">
           Insérer
         </div>
         <div className="flex gap-1">
@@ -40,7 +40,7 @@ export function EditorMenus({
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 1 }).run()
             }
-            className="text-lg font-bold"
+            className="text-lg font-bold text-brand-primary-dark dark:text-brand-mint"
           >
             H1
           </Button>
@@ -50,7 +50,7 @@ export function EditorMenus({
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 2 }).run()
             }
-            className="text-base font-bold"
+            className="text-base font-bold text-brand-primary-dark dark:text-brand-mint"
           >
             H2
           </Button>
@@ -60,10 +60,11 @@ export function EditorMenus({
             onClick={() =>
               editor.chain().focus().toggleHeading({ level: 3 }).run()
             }
+            className="font-bold text-brand-primary-dark dark:text-brand-mint"
           >
             H3
           </Button>
-          <Button size="sm" variant="ghost" onClick={onAddImage}>
+          <Button size="sm" variant="ghost" onClick={onAddImage} className="text-brand-primary dark:text-brand-primary-light">
             <ImageIcon className="h-4 w-4" />
           </Button>
         </div>
@@ -71,13 +72,13 @@ export function EditorMenus({
 
       <BubbleMenu
         editor={editor}
-        className="flex gap-1 p-2 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-lg shadow-xl"
+        className="flex gap-1 p-2 bg-popover border dark:border-brand-primary/30 rounded-lg shadow-xl"
       >
         <Toggle
           size="sm"
           pressed={editor.isActive('bold')}
           onPressedChange={() => editor.chain().focus().toggleBold().run()}
-          className="h-8 w-8 data-[state=on]:bg-blue-100 dark:data-[state=on]:bg-blue-900"
+          className="h-8 w-8 data-[state=on]:bg-primary/10 dark:data-[state=on]:bg-primary/50"
         >
           <Bold className="h-4 w-4" />
         </Toggle>
@@ -85,7 +86,7 @@ export function EditorMenus({
           size="sm"
           pressed={editor.isActive('italic')}
           onPressedChange={() => editor.chain().focus().toggleItalic().run()}
-          className="h-8 w-8 data-[state=on]:bg-blue-100 dark:data-[state=on]:bg-blue-900"
+          className="h-8 w-8 data-[state=on]:bg-primary/10 dark:data-[state=on]:bg-primary/50"
         >
           <Italic className="h-4 w-4" />
         </Toggle>
@@ -93,18 +94,18 @@ export function EditorMenus({
           size="sm"
           pressed={editor.isActive('underline')}
           onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
-          className="h-8 w-8 data-[state=on]:bg-blue-100 dark:data-[state=on]:bg-blue-900"
+          className="h-8 w-8 data-[state=on]:bg-primary/10 dark:data-[state=on]:bg-primary/50"
         >
           <UnderlineIcon className="h-4 w-4" />
         </Toggle>
-        <Button size="sm" variant="ghost" onClick={onAddLink} className="h-8">
+        <Button size="sm" variant="ghost" onClick={onAddLink} className="h-8 text-brand-primary dark:text-brand-primary-light">
           <LinkIcon className="h-4 w-4" />
         </Button>
         <Button
           size="sm"
           variant="ghost"
           onClick={onClearFormatting}
-          className="h-8"
+          className="h-8 text-brand-secondary"
         >
           <Eraser className="h-4 w-4" />
         </Button>
