@@ -1,6 +1,8 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Calendar, Clock, Share2, Tag, User } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ImageCarousel } from './ImageCarousel';
 import type { WordPressPost } from './services/wordpress.types';
 
 interface BlogPostProps {
@@ -9,11 +11,44 @@ interface BlogPostProps {
 }
 
 export function BlogPost({ post, onBack }: BlogPostProps) {
+  const [showCarousel, setShowCarousel] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [contentImages, setContentImages] = useState<string[]>([]);
+  const [processedContent, setProcessedContent] = useState('');
+
   // Extract data from embedded fields
   const featuredImage = (post as any)?._embedded?.['wp:featuredmedia']?.[0]?.source_url;
   const authorName = (post as any)?._embedded?.author?.[0]?.name || 'Unknown Author';
   const categories = (post as any)?._embedded?.['wp:term']?.[0] || [];
   const tags = (post as any)?._embedded?.['wp:term']?.[1] || [];
+
+  // Extract images from content
+  useEffect(() => {
+    if (!post.content?.rendered) return;
+
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = post.content.rendered;
+    
+    const imgElements = tempDiv.querySelectorAll('img');
+    const images: string[] = [];
+    
+    imgElements.forEach((img) => {
+      const src = img.getAttribute('src');
+      if (src) {
+        images.push(src);
+      }
+    });
+
+    setContentImages(images);
+
+    // Remove images from content if there are multiple
+    if (images.length > 1) {
+      imgElements.forEach((img) => img.remove());
+      setProcessedContent(tempDiv.innerHTML);
+    } else {
+      setProcessedContent(post.content.rendered);
+    }
+  }, [post.content?.rendered]);
 
   // Format date
   const formatDate = (dateString?: string) => {
@@ -44,6 +79,11 @@ export function BlogPost({ post, onBack }: BlogPostProps) {
       navigator.clipboard.writeText(post.link);
       alert('Lien copié dans le presse-papiers!');
     }
+  };
+
+  const openCarousel = (index: number) => {
+    setCarouselIndex(index);
+    setShowCarousel(true);
   };
 
   return (
@@ -148,19 +188,57 @@ export function BlogPost({ post, onBack }: BlogPostProps) {
           </Button>
         </div>
 
+        {/* Image Gallery (if multiple images) */}
+        {contentImages.length > 1 && (
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+              Galerie ({contentImages.length} images)
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {contentImages.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => openCarousel(idx)}
+                  className="relative aspect-square overflow-hidden rounded-xl group cursor-pointer"
+                >
+                  <img
+                    src={img}
+                    alt={`Image ${idx + 1}`}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                    <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity font-semibold text-lg">
+                      {idx + 1}
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Post Content */}
         <article
           className="prose prose-lg dark:prose-invert max-w-none
             prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
             prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
             prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
-            prose-img:rounded-xl prose-img:shadow-lg
+            prose-img:rounded-xl prose-img:shadow-lg prose-img:cursor-pointer
             prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-900/20 prose-blockquote:p-4 prose-blockquote:rounded-r-lg
             prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
             prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950 prose-pre:shadow-xl"
-          dangerouslySetInnerHTML={{ __html: post.content?.rendered || '' }}
+          dangerouslySetInnerHTML={{ __html: processedContent }}
         />
       </div>
+
+      {/* Image Carousel */}
+      {showCarousel && contentImages.length > 0 && (
+        <ImageCarousel
+          images={contentImages}
+          initialIndex={carouselIndex}
+          onClose={() => setShowCarousel(false)}
+        />
+      )}
     </div>
   );
 }
