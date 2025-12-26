@@ -1,25 +1,31 @@
-import React, { useState } from 'react';
-import { BlogEditor } from './BlogEditor';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { 
-  Save, 
-  Eye, 
-  Upload,
-  Tag,
-  Calendar
-} from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { 
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  AlertCircle,
+  Calendar,
+  CheckCircle2,
+  Eye,
+  Loader2,
+  Save,
+  Tag,
+  Upload
+} from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { BlogEditor } from './BlogEditor';
+import { getWordPressConfig, isWordPressConfigured } from './config/wordpress.config';
+import { useWordPress } from './hooks/useWordPress';
 
 export function CreateBlogPost() {
   const [title, setTitle] = useState('');
@@ -28,10 +34,21 @@ export function CreateBlogPost() {
   const [category, setCategory] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [newTag, setNewTag] = useState('');
-  const [status, setStatus] = useState('draft');
+  const [status, setStatus] = useState<'draft' | 'publish' | 'pending' | 'private'>('draft');
   const [featuredImage, setFeaturedImage] = useState<string | null>(null);
+  const [featuredImageFile, setFeaturedImageFile] = useState<File | null>(null);
+  const [isPublishing, setIsPublishing] = useState(false);
 
-  const categories = ['Technologie', 'Lifestyle', 'Voyage', 'Cuisine', 'Sport'];
+  // WordPress integration
+  const wpConfig = getWordPressConfig();
+  const wordpress = wpConfig ? useWordPress({ config: wpConfig }) : null;
+
+  // Load categories from WordPress
+  useEffect(() => {
+    if (wordpress && wordpress.categories.length === 0) {
+      wordpress.loadCategories();
+    }
+  }, [wordpress]);
 
   const handleAddTag = () => {
     if (newTag.trim() && !tags.includes(newTag.trim())) {
@@ -47,6 +64,7 @@ export function CreateBlogPost() {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      setFeaturedImageFile(file);
       const reader = new FileReader();
       reader.onloadend = () => {
         setFeaturedImage(reader.result as string);
@@ -55,38 +73,199 @@ export function CreateBlogPost() {
     }
   };
 
-  const handleSubmit = () => {
-    const post = {
-      title,
-      excerpt,
-      content,
-      category,
-      tags,
-      status,
-      featuredImage,
-      createdAt: new Date().toISOString(),
-    };
-    console.log('Article sauvegardé:', post);
-    // Ici, vous enverriez les données à votre API
+  const handleSubmit = async () => {
+    if (!isWordPressConfigured()) {
+      toast.error('WordPress is not configured. Please set up your .env.local file.');
+      console.log('Article saved locally:', {
+        title,
+        excerpt,
+        content,
+        category,
+        tags,
+        status,
+        featuredImage,
+        createdAt: new Date().toISOString(),
+      });
+      return;
+    }
+
+    if (!wordpress) {
+      toast.error('WordPress service is not available');
+      return;
+    }
+
+    if (!title.trim()) {
+      toast.error('Please enter a title for your post');
+      return;
+    }
+
+    if (!content.trim()) {
+      toast.error('Please add some content to your post');
+      return;
+    }
+
+    setIsPublishing(true);
+    const publishToast = toast.loading('Publishing to WordPress...');
+
+    try {
+      // Upload featured image if exists
+      let featuredMediaId: number | undefined;
+      if (featuredImageFile) {
+        toast.loading('Uploading featured image...', { id: publishToast });
+        featuredMediaId = await wordpress.uploadMedia({
+          file: featuredImageFile,
+          title: title,
+          alt_text: title,
+        }) || undefined;
+      }
+
+      // Get or create category
+      let categoryId: number | undefined;
+      if (category) {
+        toast.loading('Processing category...', { id: publishToast });
+        categoryId = await wordpress.findOrCreateCategory(category) || undefined;
+      }
+
+      // Get or create tags
+      toast.loading('Processing tags...', { id: publishToast });
+      const tagIds: number[] = [];
+      for (const tagName of tags) {
+        const tagId = await wordpress.findOrCreateTag(tagName);
+        if (tagId) tagIds.push(tagId);
+      }
+
+      // Create the post
+      toast.loading('Creating post...', { id: publishToast });
+      const post = await wordpress.createPost({
+        title,
+        content, // HTML content from TipTap editor
+        excerpt,
+        status,
+        categories: categoryId ? [categoryId] : undefined,
+        tags: tagIds.length > 0 ? tagIds : undefined,
+        featuredMediaId,
+      });
+
+      if (post) {
+        toast.success(
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="h-5 w-5" />
+            <div>
+              <p className="font-semibold">Post published successfully!</p>
+              {post.link && (
+                <a 
+                  href={post.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-600 hover:underline"
+                >
+                  View post →
+                </a>
+              )}
+            </div>
+          </div>,
+          { id: publishToast, duration: 5000 }
+        );
+
+        // Clear form
+        setTitle('');
+        setExcerpt('');
+        setContent('');
+        setCategory('');
+        setTags([]);
+        setFeaturedImage(null);
+        setFeaturedImageFile(null);
+        setStatus('draft');
+      } else {
+        throw new Error('Failed to create post');
+      }
+    } catch (error) {
+      console.error('Error publishing to WordPress:', error);
+      toast.error(
+        <div className="flex items-center gap-2">
+          <AlertCircle className="h-5 w-5" />
+          <div>
+            <p className="font-semibold">Failed to publish post</p>
+            <p className="text-sm">{wordpress.error || 'Unknown error occurred'}</p>
+          </div>
+        </div>,
+        { id: publishToast, duration: 5000 }
+      );
+    } finally {
+      setIsPublishing(false);
+    }
   };
 
   const handlePreview = () => {
-    // Logique pour la prévisualisation
-    console.log('Prévisualisation:', { title, content });
+    // Create a preview window with the content
+    const previewWindow = window.open('', '_blank');
+    if (previewWindow) {
+      previewWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>${title || 'Preview'}</title>
+            <style>
+              body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 2rem;
+                line-height: 1.6;
+              }
+              h1 { margin-bottom: 0.5rem; }
+              .excerpt { color: #666; font-style: italic; margin-bottom: 2rem; }
+              .content { margin-top: 2rem; }
+              img { max-width: 100%; height: auto; }
+            </style>
+          </head>
+          <body>
+            <h1>${title || 'Untitled'}</h1>
+            ${excerpt ? `<p class="excerpt">${excerpt}</p>` : ''}
+            ${featuredImage ? `<img src="${featuredImage}" alt="Featured image" />` : ''}
+            <div class="content">${content}</div>
+          </body>
+        </html>
+      `);
+      previewWindow.document.close();
+    }
   };
 
   return (
     <div className="container mx-auto p-4 space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Créer un nouvel article</h1>
+        <div>
+          <h1 className="text-3xl font-bold">Créer un nouvel article</h1>
+          {!isWordPressConfigured() && (
+            <p className="text-sm text-amber-600 mt-1 flex items-center gap-1">
+              <AlertCircle className="h-4 w-4" />
+              WordPress not configured - posts will be saved locally only
+            </p>
+          )}
+          {wordpress?.isLoading && (
+            <p className="text-sm text-blue-600 mt-1 flex items-center gap-1">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Loading WordPress data...
+            </p>
+          )}
+        </div>
         <div className="flex gap-2">
-          <Button variant="outline" onClick={handlePreview}>
+          <Button variant="outline" onClick={handlePreview} disabled={isPublishing}>
             <Eye className="h-4 w-4 mr-2" />
             Prévisualiser
           </Button>
-          <Button onClick={handleSubmit}>
-            <Save className="h-4 w-4 mr-2" />
-            Publier
+          <Button onClick={handleSubmit} disabled={isPublishing}>
+            {isPublishing ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                Publishing...
+              </>
+            ) : (
+              <>
+                <Save className="h-4 w-4 mr-2" />
+                Publier
+              </>
+            )}
           </Button>
         </div>
       </div>
@@ -144,14 +323,18 @@ export function CreateBlogPost() {
               <CardTitle>Statut</CardTitle>
             </CardHeader>
             <CardContent>
-              <Select value={status} onValueChange={setStatus}>
+              <Select 
+                value={status} 
+                onValueChange={(value) => setStatus(value as 'draft' | 'publish' | 'pending' | 'private')}
+              >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="draft">Brouillon</SelectItem>
-                  <SelectItem value="published">Publié</SelectItem>
-                  <SelectItem value="scheduled">Planifié</SelectItem>
+                  <SelectItem value="publish">Publié</SelectItem>
+                  <SelectItem value="future">Planifié</SelectItem>
+                  <SelectItem value="private">Privé</SelectItem>
                 </SelectContent>
               </Select>
             </CardContent>
@@ -168,13 +351,28 @@ export function CreateBlogPost() {
                   <SelectValue placeholder="Sélectionner une catégorie" />
                 </SelectTrigger>
                 <SelectContent>
-                  {categories.map((cat) => (
-                    <SelectItem key={cat} value={cat.toLowerCase()}>
-                      {cat}
-                    </SelectItem>
-                  ))}
+                  {wordpress && wordpress.categories.length > 0 ? (
+                    wordpress.categories.map((cat) => (
+                      <SelectItem key={cat.id} value={cat.name}>
+                        {cat.name}
+                      </SelectItem>
+                    ))
+                  ) : (
+                    <>
+                      <SelectItem value="Technologie">Technologie</SelectItem>
+                      <SelectItem value="Lifestyle">Lifestyle</SelectItem>
+                      <SelectItem value="Voyage">Voyage</SelectItem>
+                      <SelectItem value="Cuisine">Cuisine</SelectItem>
+                      <SelectItem value="Sport">Sport</SelectItem>
+                    </>
+                  )}
                 </SelectContent>
               </Select>
+              {wordpress && wordpress.categories.length > 0 && (
+                <p className="text-xs text-gray-500 mt-2">
+                  {wordpress.categories.length} categories loaded from WordPress
+                </p>
+              )}
             </CardContent>
           </Card>
 

@@ -341,8 +341,9 @@ function BlogEditorContent({
             <EditorMenus
               editor={editor}
               onAddLink={addLink}
-              onClearFormatting={clearFormatting}
-            />
+              onClearFormatting={clearFormatting} onAddImage={function (): void {
+                throw new Error('Function not implemented.');
+              } }            />
           </>
         )}
 
