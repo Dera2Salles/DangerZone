@@ -208,6 +208,76 @@ export class WordPressService {
   }
 
   /**
+   * Get posts with optional filtering and pagination
+   */
+  async getPosts(params?: {
+    page?: number;
+    per_page?: number;
+    categories?: number[];
+    tags?: number[];
+    search?: string;
+    status?: string;
+  }): Promise<WordPressApiResponse<WordPressPost[]>> {
+    try {
+      const response = await this.api.get<WordPressPost[]>('/posts', {
+        params: {
+          page: params?.page || 1,
+          per_page: params?.per_page || 10,
+          categories: params?.categories?.join(','),
+          tags: params?.tags?.join(','),
+          search: params?.search,
+          status: params?.status || 'publish',
+          _embed: true, // Include embedded data (featured image, author, etc.)
+        },
+      });
+
+      return {
+        success: true,
+        data: response.data,
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error as WordPressError,
+      };
+    }
+  }
+
+  /**
+   * Get a post by slug
+   */
+  async getPostBySlug(slug: string): Promise<WordPressApiResponse<WordPressPost>> {
+    try {
+      const response = await this.api.get<WordPressPost[]>('/posts', {
+        params: {
+          slug,
+          _embed: true,
+        },
+      });
+
+      if (response.data.length === 0) {
+        return {
+          success: false,
+          error: {
+            code: 'not_found',
+            message: 'Post not found',
+          },
+        };
+      }
+
+      return {
+        success: true,
+        data: response.data[0],
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error as WordPressError,
+      };
+    }
+  }
+
+  /**
    * Delete a post
    */
   async deletePost(id: number, force: boolean = false): Promise<WordPressApiResponse<WordPressPost>> {
