@@ -307,7 +307,7 @@ function BlogEditorContent({
     <TooltipProvider>
       <div
         className={`blog-editor-container border rounded-xl overflow-hidden bg-white dark:bg-gray-900 shadow-lg transition-all duration-300 ${
-          isFullscreen ? 'fixed inset-0 z-50 m-0' : ''
+          isFullscreen ? 'fixed inset-0 z-50 m-0 flex flex-col' : ''
         }`}
       >
         <Header
@@ -362,7 +362,7 @@ function BlogEditorContent({
           </div>
         )}
 
-        <div className="relative">
+        <div className={`relative ${isFullscreen ? 'flex-1 overflow-y-auto' : ''}`}>
           <div className={`p-4 ${isFullscreen ? 'max-w-6xl mx-auto' : ''}`}>
             <EditorContent editor={editor} />
           </div>
