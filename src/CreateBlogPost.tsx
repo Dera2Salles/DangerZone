@@ -38,6 +38,8 @@ export function CreateBlogPost() {
   const [featuredImage, setFeaturedImage] = useState<string | null>(null);
   const [featuredImageFile, setFeaturedImageFile] = useState<File | null>(null);
   const [isPublishing, setIsPublishing] = useState(false);
+  const [showNewCategoryDialog, setShowNewCategoryDialog] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState('');
 
   // WordPress integration
   const wpConfig = getWordPressConfig();
@@ -196,6 +198,35 @@ export function CreateBlogPost() {
     }
   };
 
+  const handleCreateCategory = async () => {
+    if (!wordpress || !newCategoryName.trim()) return;
+
+    const loadingToast = toast.loading('Création de la catégorie...');
+
+    try {
+      const categoryId = await wordpress.findOrCreateCategory(newCategoryName.trim());
+      
+      if (categoryId) {
+        toast.success('Catégorie créée avec succès!', { id: loadingToast });
+        
+        // Reload categories to update the list
+        await wordpress.loadCategories();
+        
+        // Select the newly created category
+        setCategory(newCategoryName.trim());
+        
+        // Close dialog and reset
+        setShowNewCategoryDialog(false);
+        setNewCategoryName('');
+      } else {
+        throw new Error('Failed to create category');
+      }
+    } catch (error) {
+      console.error('Error creating category:', error);
+      toast.error('Erreur lors de la création de la catégorie', { id: loadingToast });
+    }
+  };
+
   const handlePreview = () => {
     // Create a preview window with the content
     const previewWindow = window.open('', '_blank');
@@ -346,35 +377,94 @@ export function CreateBlogPost() {
               <CardTitle>Catégorie</CardTitle>
             </CardHeader>
             <CardContent>
-              <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Sélectionner une catégorie" />
-                </SelectTrigger>
-                <SelectContent>
-                  {wordpress && wordpress.categories.length > 0 ? (
-                    wordpress.categories.map((cat) => (
-                      <SelectItem key={cat.id} value={cat.name}>
-                        {cat.name}
-                      </SelectItem>
-                    ))
-                  ) : (
-                    <>
-                      <SelectItem value="Technologie">Technologie</SelectItem>
-                      <SelectItem value="Lifestyle">Lifestyle</SelectItem>
-                      <SelectItem value="Voyage">Voyage</SelectItem>
-                      <SelectItem value="Cuisine">Cuisine</SelectItem>
-                      <SelectItem value="Sport">Sport</SelectItem>
-                    </>
-                  )}
-                </SelectContent>
-              </Select>
-              {wordpress && wordpress.categories.length > 0 && (
-                <p className="text-xs text-gray-500 mt-2">
-                  {wordpress.categories.length} categories loaded from WordPress
-                </p>
-              )}
+              <div className="space-y-3">
+                <Select value={category} onValueChange={setCategory}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Sélectionner une catégorie" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {wordpress && wordpress.categories.length > 0 ? (
+                      wordpress.categories.map((cat) => (
+                        <SelectItem key={cat.id} value={cat.name}>
+                          {cat.name}
+                        </SelectItem>
+                      ))
+                    ) : (
+                      <>
+                        <SelectItem value="Technologie">Technologie</SelectItem>
+                        <SelectItem value="Lifestyle">Lifestyle</SelectItem>
+                        <SelectItem value="Voyage">Voyage</SelectItem>
+                        <SelectItem value="Cuisine">Cuisine</SelectItem>
+                        <SelectItem value="Sport">Sport</SelectItem>
+                      </>
+                    )}
+                  </SelectContent>
+                </Select>
+                
+                {/* Add New Category Button */}
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setShowNewCategoryDialog(true)}
+                  className="w-full gap-2"
+                >
+                  <span className="text-lg">+</span>
+                  Créer une nouvelle catégorie
+                </Button>
+                
+                {wordpress && wordpress.categories.length > 0 && (
+                  <p className="text-xs text-gray-500">
+                    {wordpress.categories.length} catégories disponibles
+                  </p>
+                )}
+              </div>
             </CardContent>
           </Card>
+
+          {/* New Category Dialog */}
+          {showNewCategoryDialog && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
+                <h3 className="text-lg font-semibold mb-4">Nouvelle Catégorie</h3>
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="new-category">Nom de la catégorie</Label>
+                    <Input
+                      id="new-category"
+                      value={newCategoryName}
+                      onChange={(e) => setNewCategoryName(e.target.value)}
+                      placeholder="Ex: Technologie"
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          handleCreateCategory();
+                        }
+                      }}
+                    />
+                  </div>
+                  <div className="flex gap-2 justify-end">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() => {
+                        setShowNewCategoryDialog(false);
+                        setNewCategoryName('');
+                      }}
+                    >
+                      Annuler
+                    </Button>
+                    <Button
+                      type="button"
+                      onClick={handleCreateCategory}
+                      disabled={!newCategoryName.trim()}
+                    >
+                      Créer
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {/* Tags */}
           <Card>
