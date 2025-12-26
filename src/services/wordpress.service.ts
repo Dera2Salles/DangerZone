@@ -33,11 +33,21 @@ export class WordPressService {
       headers: {
         'Content-Type': 'application/json',
       },
-      auth: {
+    });
+
+    // Set up authentication
+    // If a JWT token is provided, use Bearer token authentication
+    // Otherwise, use Basic Auth with username/password
+    if (config.jwtToken) {
+      console.log('🔑 Using JWT Token authentication');
+      this.api.defaults.headers.common['Authorization'] = `Bearer ${config.jwtToken}`;
+    } else {
+      console.log('🔑 Using Basic Auth authentication');
+      this.api.defaults.auth = {
         username: config.username,
         password: config.applicationPassword,
-      },
-    });
+      };
+    }
 
     // Add request interceptor for debugging
     this.api.interceptors.request.use(
@@ -47,6 +57,7 @@ export class WordPressService {
           url: config.url,
           baseURL: config.baseURL,
           fullURL: `${config.baseURL}${config.url}`,
+          hasAuth: !!config.headers?.Authorization || !!config.auth,
         });
         return config;
       },

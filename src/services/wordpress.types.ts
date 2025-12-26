@@ -7,6 +7,7 @@ export interface WordPressConfig {
   siteUrl: string;
   username: string;
   applicationPassword: string;
+  jwtToken?: string; // Optional: Use JWT token instead of Basic Auth
 }
 
 export interface WordPressPost {
