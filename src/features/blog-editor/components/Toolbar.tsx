@@ -1,50 +1,50 @@
-import { Editor } from '@tiptap/react';
-import React, { useRef } from 'react';
-import {
-  AlignCenter,
-  AlignLeft,
-  AlignRight,
-  Bold,
-  CheckSquare,
-  Code,
-  Eraser,
-  Highlighter,
-  Image as ImageIcon,
-  Italic,
-  Link as LinkIcon,
-  List,
-  ListOrdered,
-  Minus,
-  Paintbrush,
-  PaintBucket,
-  Pilcrow,
-  Quote,
-  Sparkles,
-  Strikethrough,
-  Subscript as SubscriptIcon,
-  Superscript as SuperscriptIcon,
-  Table as TableIcon,
-  Type,
-  Underline as UnderlineIcon,
-  GripVertical,
-  Type as FontSizeIcon,
-  ChevronDown,
-} from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Separator } from '@/components/ui/separator';
+import { Slider } from '@/components/ui/slider';
 import { Toggle } from '@/components/ui/toggle';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Separator } from '@/components/ui/separator';
+import { Editor } from '@tiptap/react';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Slider } from '@/components/ui/slider';
+    AlignCenter,
+    AlignLeft,
+    AlignRight,
+    Bold,
+    CheckSquare,
+    ChevronDown,
+    Code,
+    Eraser,
+    Type as FontSizeIcon,
+    GripVertical,
+    Highlighter,
+    Image as ImageIcon,
+    Italic,
+    Link as LinkIcon,
+    List,
+    ListOrdered,
+    Minus,
+    Paintbrush,
+    PaintBucket,
+    Pilcrow,
+    Quote,
+    Sparkles,
+    Strikethrough,
+    Subscript as SubscriptIcon,
+    Superscript as SuperscriptIcon,
+    Table as TableIcon,
+    Type,
+    Underline as UnderlineIcon,
+} from 'lucide-react';
+import React, { useRef } from 'react';
 
 interface ToolbarProps {
   editor: Editor;
@@ -146,7 +146,7 @@ export function Toolbar({
         className="hidden"
       />
 
-      <div className="flex flex-wrap items-center gap-1 p-3 border-b bg-gradient-to-r from-blue-50 to-white dark:from-gray-800 dark:to-gray-900">
+      <div className="flex flex-wrap items-center gap-1 p-3 border-b bg-gradient-to-r from-brand-mint/20 to-white dark:from-brand-primary-dark/20 dark:to-brand-primary-navy/40">
         {/* Famille de police */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -218,7 +218,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('bold')}
                 onPressedChange={() => editor.chain().focus().toggleBold().run()}
-                className="h-8 w-8 data-[state=on]:bg-blue-100 dark:data-[state=on]:bg-blue-900"
+                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
               >
                 <Bold className="h-4 w-4" />
               </Toggle>
@@ -232,7 +232,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('italic')}
                 onPressedChange={() => editor.chain().focus().toggleItalic().run()}
-                className="h-8 w-8 data-[state=on]:bg-blue-100 dark:data-[state=on]:bg-blue-900"
+                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
               >
                 <Italic className="h-4 w-4" />
               </Toggle>
@@ -246,7 +246,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('underline')}
                 onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
-                className="h-8 w-8 data-[state=on]:bg-blue-100 dark:data-[state=on]:bg-blue-900"
+                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
               >
                 <UnderlineIcon className="h-4 w-4" />
               </Toggle>
@@ -260,7 +260,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('strike')}
                 onPressedChange={() => editor.chain().focus().toggleStrike().run()}
-                className="h-8 w-8 data-[state=on]:bg-blue-100 dark:data-[state=on]:bg-blue-900"
+                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
               >
                 <Strikethrough className="h-4 w-4" />
               </Toggle>
@@ -276,7 +276,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('superscript')}
                 onPressedChange={() => editor.chain().focus().toggleSuperscript().run()}
-                className="h-8 w-8 data-[state=on]:bg-blue-100 dark:data-[state=on]:bg-blue-900"
+                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
               >
                 <SuperscriptIcon className="h-4 w-4" />
               </Toggle>
@@ -290,7 +290,7 @@ export function Toolbar({
                 size="sm"
                 pressed={editor.isActive('subscript')}
                 onPressedChange={() => editor.chain().focus().toggleSubscript().run()}
-                className="h-8 w-8 data-[state=on]:bg-blue-100 dark:data-[state=on]:bg-blue-900"
+                className="h-8 w-8 data-[state=on]:bg-brand-primary/10 dark:data-[state=on]:bg-brand-primary-dark/50"
               >
                 <SubscriptIcon className="h-4 w-4" />
               </Toggle>
@@ -633,4 +633,4 @@ export function Toolbar({
 }
 
 // Ajoutez ces imports manquants si nécessaire
-import { Undo as UndoIcon, Redo as RedoIcon } from 'lucide-react';
+import { Redo as RedoIcon, Undo as UndoIcon } from 'lucide-react';

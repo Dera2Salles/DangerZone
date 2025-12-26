@@ -1,9 +1,9 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import type { WordPressPost } from '@/services/wordpress/wordpress.types';
 import { ArrowLeft, Calendar, Clock, Share2, Tag, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { ImageCarousel } from './ImageCarousel';
-import type { WordPressPost } from './services/wordpress.types';
 
 interface BlogPostProps {
   post: WordPressPost;
@@ -87,7 +87,7 @@ export function BlogPost({ post, onBack }: BlogPostProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-br from-brand-mint/5 to-white dark:from-brand-primary-dark/20 dark:to-brand-primary-navy/20">
       {/* Back Button */}
       <div className="container mx-auto px-4 py-6">
         <Button
@@ -152,7 +152,7 @@ export function BlogPost({ post, onBack }: BlogPostProps) {
                 <Badge
                   key={category.id}
                   variant="secondary"
-                  className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-100"
+                  className="bg-brand-primary-light text-white dark:bg-brand-primary dark:text-brand-mint"
                 >
                   {category.name}
                 </Badge>
@@ -191,7 +191,7 @@ export function BlogPost({ post, onBack }: BlogPostProps) {
         {/* Image Gallery (if multiple images) */}
         {contentImages.length > 1 && (
           <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+            <h2 className="text-2xl font-bold mb-4 text-brand-primary-dark dark:text-brand-mint">
               Galerie ({contentImages.length} images)
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -220,13 +220,13 @@ export function BlogPost({ post, onBack }: BlogPostProps) {
         {/* Post Content */}
         <article
           className="prose prose-lg dark:prose-invert max-w-none
-            prose-headings:font-bold prose-headings:text-gray-900 dark:prose-headings:text-white
-            prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed
-            prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
+            prose-headings:font-bold prose-headings:text-brand-primary-dark dark:prose-headings:text-brand-mint
+            prose-p:text-brand-primary-navy/80 dark:prose-p:text-brand-secondary/90 prose-p:leading-relaxed
+            prose-a:text-brand-primary dark:prose-a:text-brand-primary-light prose-a:no-underline hover:prose-a:underline
             prose-img:rounded-xl prose-img:shadow-lg prose-img:cursor-pointer
-            prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-blue-50 dark:prose-blockquote:bg-blue-900/20 prose-blockquote:p-4 prose-blockquote:rounded-r-lg
-            prose-code:bg-gray-100 dark:prose-code:bg-gray-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
-            prose-pre:bg-gray-900 dark:prose-pre:bg-gray-950 prose-pre:shadow-xl"
+            prose-blockquote:border-l-4 prose-blockquote:border-brand-primary prose-blockquote:bg-brand-mint/10 dark:prose-blockquote:bg-brand-primary-dark/20 prose-blockquote:p-4 prose-blockquote:rounded-r-lg
+            prose-code:bg-brand-mint/10 dark:prose-code:bg-brand-primary-dark/30 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+            prose-pre:bg-brand-primary-navy dark:prose-pre:bg-black/40 prose-pre:shadow-xl"
           dangerouslySetInnerHTML={{ __html: processedContent }}
         />
       </div>

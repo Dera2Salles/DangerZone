@@ -77,7 +77,7 @@ function BlogEditorContent({
       Link.configure({
         openOnClick: true,
         HTMLAttributes: {
-          class: 'text-blue-600 underline cursor-pointer hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300',
+          class: 'text-brand-primary underline cursor-pointer hover:text-brand-primary-dark dark:text-brand-primary-light dark:hover:text-brand-primary',
           rel: 'noopener noreferrer',
         },
       }),
@@ -372,7 +372,7 @@ function BlogEditorContent({
               {Array.from({ length: 30 }).map((_, i) => (
                 <div
                   key={i}
-                  className="border-t border-gray-100 dark:border-gray-800"
+                  className="border-t border-brand-mint/20 dark:border-brand-primary/20"
                   style={{ height: `${parseInt(lineHeight) * 24}px` }}
                 />
               ))}

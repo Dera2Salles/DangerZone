@@ -4,28 +4,28 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
+import { getWordPressConfig, isWordPressConfigured } from '@/config/wordpress.config';
+import { useWordPress } from '@/hooks/useWordPress';
 import {
-  AlertCircle,
-  Calendar,
-  CheckCircle2,
-  Eye,
-  Loader2,
-  Save,
-  Tag,
-  Upload
+    AlertCircle,
+    Calendar,
+    CheckCircle2,
+    Eye,
+    Loader2,
+    Save,
+    Tag,
+    Upload
 } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { BlogEditor } from './components/BlogEditor';
-import { getWordPressConfig, isWordPressConfigured } from '@/config/wordpress.config';
-import { useWordPress } from '@/hooks/useWordPress';
 
 export function CreateBlogPost() {
   const [title, setTitle] = useState('');
@@ -159,7 +159,7 @@ export function CreateBlogPost() {
                   href={post.link} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-sm text-blue-600 hover:underline"
+                  className="text-sm text-brand-primary hover:underline"
                 >
                   View post →
                 </a>
@@ -243,11 +243,13 @@ export function CreateBlogPost() {
                 margin: 0 auto;
                 padding: 2rem;
                 line-height: 1.6;
+                color: #112a41;
               }
-              h1 { margin-bottom: 0.5rem; }
-              .excerpt { color: #666; font-style: italic; margin-bottom: 2rem; }
+              h1 { margin-bottom: 0.5rem; color: #288279; }
+              .excerpt { color: #799F9C; font-style: italic; margin-bottom: 2rem; }
               .content { margin-top: 2rem; }
-              img { max-width: 100%; height: auto; }
+              img { max-width: 100%; height: auto; border-radius: 8px; }
+              a { color: #34b5ab; }
             </style>
           </head>
           <body>
@@ -268,13 +270,13 @@ export function CreateBlogPost() {
         <div>
           <h1 className="text-3xl font-bold">Créer un nouvel article</h1>
           {!isWordPressConfigured() && (
-            <p className="text-sm text-amber-600 mt-1 flex items-center gap-1">
+            <p className="text-sm text-brand-gold mt-1 flex items-center gap-1">
               <AlertCircle className="h-4 w-4" />
               WordPress not configured - posts will be saved locally only
             </p>
           )}
           {wordpress?.isLoading && (
-            <p className="text-sm text-blue-600 mt-1 flex items-center gap-1">
+            <p className="text-sm text-brand-primary mt-1 flex items-center gap-1">
               <Loader2 className="h-4 w-4 animate-spin" />
               Loading WordPress data...
             </p>
@@ -414,7 +416,7 @@ export function CreateBlogPost() {
                 </Button>
                 
                 {wordpress && wordpress.categories.length > 0 && (
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-brand-primary/60">
                     {wordpress.categories.length} catégories disponibles
                   </p>
                 )}
@@ -528,8 +530,8 @@ export function CreateBlogPost() {
                     htmlFor="image-upload"
                     className="border-2 border-dashed rounded-lg p-8 flex flex-col items-center justify-center cursor-pointer hover:border-primary transition-colors"
                   >
-                    <Upload className="h-8 w-8 mb-2 text-gray-400" />
-                    <span className="text-sm text-gray-500">
+                    <Upload className="h-8 w-8 mb-2 text-brand-secondary" />
+                    <span className="text-sm text-brand-secondary">
                       Cliquez pour télécharger
                     </span>
                     <input

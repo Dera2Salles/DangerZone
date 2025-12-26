@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
+import type { WordPressPost } from '@/services/wordpress/wordpress.types';
 import { Calendar, Clock, User } from 'lucide-react';
-import type { WordPressPost } from './services/wordpress.types';
 
 interface BlogCardProps {
   post: WordPressPost;
@@ -40,7 +40,7 @@ export function BlogCard({ post, onClick }: BlogCardProps) {
   return (
     <Card
       onClick={onClick}
-      className="group cursor-pointer overflow-hidden border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
+      className="group cursor-pointer overflow-hidden border-0 bg-gradient-to-br from-white to-brand-mint/5 dark:from-brand-primary-dark/40 dark:to-brand-primary-navy/40 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
     >
       {/* Featured Image */}
       {featuredImage && (
@@ -58,7 +58,7 @@ export function BlogCard({ post, onClick }: BlogCardProps) {
               {categories.slice(0, 2).map((category: any) => (
                 <Badge
                   key={category.id}
-                  className="bg-white/90 text-gray-900 backdrop-blur-sm hover:bg-white"
+                  className="bg-brand-primary-light/90 text-white backdrop-blur-sm hover:bg-brand-primary"
                 >
                   {category.name}
                 </Badge>
@@ -71,20 +71,20 @@ export function BlogCard({ post, onClick }: BlogCardProps) {
       <CardContent className="p-6 space-y-4">
         {/* Title */}
         <h3
-          className="text-2xl font-bold text-gray-900 dark:text-white line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
+          className="text-2xl font-bold text-brand-primary-dark dark:text-brand-mint line-clamp-2 group-hover:text-brand-primary dark:group-hover:text-brand-primary-light transition-colors"
           dangerouslySetInnerHTML={{ __html: post.title?.rendered || 'Untitled' }}
         />
 
         {/* Excerpt */}
         {post.excerpt?.rendered && (
           <div
-            className="text-gray-600 dark:text-gray-300 line-clamp-3 text-sm leading-relaxed"
+            className="text-brand-primary-navy/70 dark:text-brand-secondary line-clamp-3 text-sm leading-relaxed"
             dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
           />
         )}
 
         {/* Metadata */}
-        <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-brand-secondary dark:text-brand-secondary/80 pt-4 border-t border-brand-mint dark:border-brand-primary/30">
           <div className="flex items-center gap-1.5">
             <User className="h-4 w-4" />
             <span>{authorName}</span>
@@ -105,7 +105,7 @@ export function BlogCard({ post, onClick }: BlogCardProps) {
 
         {/* Read More Button */}
         <div className="pt-2">
-          <span className="inline-flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:gap-2 transition-all">
+          <span className="inline-flex items-center text-brand-primary dark:text-brand-primary-light font-semibold group-hover:gap-2 transition-all">
             Lire la suite
             <span className="ml-1 group-hover:ml-2 transition-all">→</span>
           </span>

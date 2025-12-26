@@ -1,10 +1,10 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import type { WordPressCategory, WordPressPost } from '@/services/wordpress';
 import { AlertCircle, Filter, Loader2, Search } from 'lucide-react';
 import { useState } from 'react';
 import { BlogCard } from './BlogCard';
-import type { WordPressCategory, WordPressPost } from './services/wordpress.types';
 
 interface BlogListProps {
   posts: WordPressPost[];
@@ -43,14 +43,14 @@ export function BlogList({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-brand-mint/20 via-background to-brand-cream/20">
       <div className="container mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-brand-primary to-brand-teal bg-clip-text text-transparent mb-4">
             Blog
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-brand-primary-navy/80 dark:text-brand-mint max-w-2xl mx-auto">
             Découvrez nos derniers articles et actualités
           </p>
         </div>
@@ -64,7 +64,7 @@ export function BlogList({
               placeholder="Rechercher un article..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 pr-4 h-14 text-lg border-2 border-gray-200 dark:border-gray-700 focus:border-blue-500 dark:focus:border-blue-400 rounded-full shadow-lg"
+              className="pl-12 pr-4 h-14 text-lg border-2 border-brand-mint dark:border-brand-primary/30 focus:border-brand-primary dark:focus:border-brand-primary-light rounded-full shadow-lg"
             />
             <Button
               type="submit"
@@ -102,8 +102,8 @@ export function BlogList({
         {/* Loading State */}
         {isLoading && posts.length === 0 && (
           <div className="flex flex-col items-center justify-center py-20">
-            <Loader2 className="h-12 w-12 animate-spin text-blue-600 mb-4" />
-            <p className="text-gray-600 dark:text-gray-300 text-lg">
+            <Loader2 className="h-12 w-12 animate-spin text-brand-primary mb-4" />
+            <p className="text-brand-primary-dark dark:text-brand-mint text-lg">
               Chargement des articles...
             </p>
           </div>
