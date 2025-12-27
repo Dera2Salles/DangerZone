@@ -24,16 +24,16 @@ export function AboutSection() {
             {/* Experience Badge */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-primary-navy text-white p-8 rounded-full shadow-2xl text-center backdrop-blur-md border-[6px] border-white dark:border-gray-800">
               <span className="block text-4xl font-bold">25+</span>
-              <span className="text-xs uppercase tracking-widest text-brand-gold">Years</span>
+              <span className="text-xs uppercase tracking-widest text-brand-gold">Ans</span>
             </div>
           </div>
 
           {/* Content */}
           <div className="w-full lg:w-1/2">
-            <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">About Us</span>
+            <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">À Propos</span>
             <h2 className="text-3xl lg:text-5xl font-bold mt-2 mb-6 text-brand-primary-navy dark:text-white leading-tight">
-              A Vision of <br/> 
-              <span className="text-brand-primary">Luxury & Harmony</span>
+              Une Vision de <br/> 
+              <span className="text-brand-primary">Luxe & Harmonie</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed italic border-l-4 border-brand-gold pl-4">
               "Devenir la référence incontestée de la gestion locative haut standing à Madagascar. Nous aspirons à bâtir un réseau d'hébergements d'exception, combinant innovation, qualité de services et ancrage locale."
@@ -75,7 +75,7 @@ export function AboutSection() {
             </div>
 
             <Button size="lg" className="bg-brand-primary text-white hover:bg-brand-primary-dark rounded-full px-8">
-              Discover Our Work
+              Découvrez Notre Travail
             </Button>
           </div>
         </div>

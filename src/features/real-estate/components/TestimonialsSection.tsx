@@ -5,44 +5,44 @@ import { Quote, Star } from 'lucide-react';
 const TESTIMONIALS = [
   {
     name: 'Isabelle & Marc Dubois',
-    role: 'Home Buyers',
+    role: 'Acheteurs',
     image: 'https://images.unsplash.com/photo-1558222218-b7b54eede3f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    quote: "Finding our dream villa on the Riviera seemed impossible until we met this team. Their dedication and market knowledge are truly unmatched.",
+    quote: "Trouver notre villa de rêve sur la Riviera semblait impossible jusqu'à ce que nous rencontrions cette équipe. Leur dévouement et connaissance du marché sont inégalés.",
     rating: 5
   },
   {
     name: 'Thomas Anderson',
-    role: 'Property Investor',
+    role: 'Investisseur Immobilier',
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    quote: "Professionalism at its finest. They managed my portfolio acquisition with absolute precision and discretion. Highly recommended for serious investors.",
+    quote: "Le professionnalisme à son apogée. Ils ont géré mon acquisition de portefeuille avec une précision et une discrétion absolues. Hautement recommandé pour les investisseurs sérieux.",
     rating: 5
   },
   {
     name: 'Sarah Jenning',
-    role: 'Seller',
+    role: 'Vendeuse',
     image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    quote: "They sold my property in record time and above the asking price. The marketing strategy was simply brilliant.",
+    quote: "Ils ont vendu ma propriété en un temps record et au-dessus du prix demandé. La stratégie marketing était tout simplement brillante.",
     rating: 5
   },
   {
     name: 'Robert Fox',
-    role: 'International Buyer',
+    role: 'Acheteur International',
     image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    quote: "Relocating from overseas was complex, but Luxe Estates handled everything. A seamless transition to our new life.",
+    quote: "Déménager de l'étranger était complexe, mais Luxe Estates a tout géré. Une transition sans faille vers notre nouvelle vie.",
     rating: 5
   },
   {
     name: 'Emily Chen',
-    role: 'Architect',
+    role: 'Architecte',
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    quote: "As an architect, I appreciate their eye for quality. They only represent properties of the highest caliber.",
+    quote: "En tant qu'architecte, j'apprécie leur œil pour la qualité. Ils ne représentent que des propriétés du plus haut calibre.",
     rating: 5
   },
   {
     name: 'David & Sofia Miller',
-    role: 'Vacation Home',
+    role: 'Maison de Vacances',
     image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-    quote: "Our summer house in Provence is a dream. We couldn't appear happier with the service and the ongoing support.",
+    quote: "Notre maison d'été en Provence est un rêve. Nous ne pourrions être plus heureux du service et du soutien continu.",
     rating: 5
   }
 ];
@@ -56,8 +56,8 @@ export function TestimonialsSection() {
 
       <div className="container mx-auto px-4 relative z-10 mb-12">
         <div className="text-center mb-16">
-          <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">Testimonials</span>
-          <h2 className="text-3xl md:text-5xl font-bold mt-2 mb-4 text-brand-primary-navy dark:text-white">What Our Clients Say</h2>
+          <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">Témoignages</span>
+          <h2 className="text-3xl md:text-5xl font-bold mt-2 mb-4 text-brand-primary-navy dark:text-white">Ce que disent nos clients</h2>
           <div className="flex justify-center gap-1">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="h-5 w-5 fill-brand-gold text-brand-gold" />

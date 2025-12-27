@@ -24,11 +24,11 @@ export function RealEstatePage() {
         <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
             <h3 className="text-2xl font-bold mb-2">Luxe Estates</h3>
-            <p className="text-gray-400 text-sm">© 2025 Luxe Estates Agency. All rights reserved.</p>
+            <p className="text-gray-400 text-sm">© 2025 Luxe Estates Agency. Tous droits réservés.</p>
           </div>
           <div className="flex gap-6 text-sm text-gray-300">
-             <a href="#" className="hover:text-brand-gold transition-colors">Privacy Policy</a>
-             <a href="#" className="hover:text-brand-gold transition-colors">Terms of Service</a>
+             <a href="#" className="hover:text-brand-gold transition-colors">Politique de Confidentialité</a>
+             <a href="#" className="hover:text-brand-gold transition-colors">Conditions d'Utilisation</a>
              <a href="#" className="hover:text-brand-gold transition-colors">Contact</a>
           </div>
         </div>

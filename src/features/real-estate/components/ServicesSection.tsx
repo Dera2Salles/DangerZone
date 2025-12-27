@@ -6,33 +6,33 @@ import { ArrowRight, Check, PlusCircle, Sparkles } from 'lucide-react';
 const PROPERTIES = [
   {
     id: 1,
-    title: 'Modern Seaside Villa',
-    location: 'Cannes, French Riviera',
+    title: 'Villa Moderne Bord de Mer',
+    location: 'Cannes, Côte d\'Azur',
     price: '€4,250,000',
-    description: 'Stunning contemporary villa with panoramic sea views, infinity pool, and private beach access.',
+    description: 'Somptueuse villa contemporaine avec vue panoramique mer, piscine à débordement et accès privé plage.',
     image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1771&q=80',
-    type: 'Sale',
-    features: ['5 Beds', '6 Baths', '450m²']
+    type: 'Vente',
+    features: ['5 Lits', '6 SDB', '450m²']
   },
   {
     id: 2,
-    title: 'Historic Penthouse',
-    location: 'Paris, 7th Arrondissement',
+    title: 'Penthouse Historique',
+    location: 'Paris, 7ème Arrondissement',
     price: '€2,800,000',
-    description: 'Elegant duplex penthouse with Eiffel Tower views, original moldings, and wrap-around terrace.',
+    description: 'Duplex élégant avec vue sur la Tour Eiffel, moulures d\'origine et terrasse panoramique.',
     image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3&auto=format&fit=crop&w=1680&q=80',
-    type: 'Sale',
-    features: ['3 Beds', '2 Baths', '180m²']
+    type: 'Vente',
+    features: ['3 Lits', '2 SDB', '180m²']
   },
   {
     id: 3,
-    title: 'Luxury Eco-Lodge',
-    location: 'Chamonix, Alps',
+    title: 'Chalet Éco-Luxe',
+    location: 'Chamonix, Alpes',
     price: '€3,100,000',
-    description: 'Sustainable luxury chalet featuring floor-to-ceiling windows, spa facilities, and ski-in/ski-out access.',
+    description: 'Chalet de luxe durable avec baies vitrées, spa et accès ski-aux-pieds.',
     image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=1365&q=80',
-    type: 'Sale',
-    features: ['6 Beds', '5 Baths', '320m²']
+    type: 'Vente',
+    features: ['6 Lits', '5 SDB', '320m²']
   }
 ];
 
@@ -99,8 +99,8 @@ export function ServicesSection() {
         {/* Featured Properties */}
         <div className="mb-32">
           <div className="text-center mb-16">
-            <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">Exclusive Listings</span>
-            <h2 className="text-3xl md:text-5xl font-bold mt-2 mb-4 text-brand-primary-navy dark:text-white">Featured Properties</h2>
+            <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">Propriétés Exclusives</span>
+            <h2 className="text-3xl md:text-5xl font-bold mt-2 mb-4 text-brand-primary-navy dark:text-white">Biens à la Une</h2>
             <div className="w-20 h-1 bg-brand-gold mx-auto rounded-full"/>
           </div>
 
@@ -142,7 +142,7 @@ export function ServicesSection() {
                 </CardContent>
                 <CardFooter>
                   <Button className="w-full bg-brand-primary-navy hover:bg-brand-primary text-white group-hover:shadow-md transition-all">
-                    View Details
+                    Voir Détails
                   </Button>
                 </CardFooter>
               </Card>
@@ -150,7 +150,7 @@ export function ServicesSection() {
           </div>
           <div className="text-center mt-12">
              <Button variant="outline" className="border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white gap-2 group">
-                View All Properties 
+                Voir toutes les propriétés 
                 <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform"/>
              </Button>
           </div>
@@ -159,10 +159,10 @@ export function ServicesSection() {
         {/* Management Packages */}
         <div className="mb-24">
            <div className="text-center mb-16">
-            <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">Our Management Offers</span>
-            <h2 className="text-3xl md:text-5xl font-bold mt-2 mb-4 text-brand-primary-navy dark:text-white">Tailored for Your Success</h2>
+            <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">Nos Offres de Gestion</span>
+            <h2 className="text-3xl md:text-5xl font-bold mt-2 mb-4 text-brand-primary-navy dark:text-white">Taillées pour Votre Succès</h2>
             <p className="max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
-              Choose the level of service that perfectly matches your investment goals and lifestyle.
+              Choisissez le niveau de service qui correspond parfaitement à vos objectifs d'investissement et à votre style de vie.
             </p>
           </div>
 
@@ -214,8 +214,8 @@ export function ServicesSection() {
                  <Sparkles className="h-6 w-6 text-brand-gold" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-brand-primary-navy dark:text-white">Extras & Add-ons</h3>
-                <p className="text-gray-500">Premium services to enhance your property's potential.</p>
+                <h3 className="text-2xl font-bold text-brand-primary-navy dark:text-white">Extras & Options</h3>
+                <p className="text-gray-500">Des services premium pour maximiser le potentiel de votre bien.</p>
               </div>
             </div>
             

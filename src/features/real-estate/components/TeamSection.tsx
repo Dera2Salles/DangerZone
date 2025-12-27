@@ -4,27 +4,27 @@ import { Linkedin, Mail, Twitter } from 'lucide-react';
 const TEAM = [
   {
     name: 'Sarah Montgomery',
-    role: 'Founder & Principal Broker',
+    role: 'Fondatrice & Directrice',
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    bio: 'With over 15 years in luxury real estate, Sarah has brokered some of the city\'s most significant transactions.'
+    bio: 'Avec plus de 15 ans dans l\'immobilier de luxe, Sarah a négocié certaines des transactions les plus importantes de la ville.'
   },
   {
     name: 'James Sterling',
-    role: 'Senior Property Consultant',
+    role: 'Consultant Senior',
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    bio: 'James specializes in historic properties and high-value investment portfolios across Europe.'
+    bio: 'James se spécialise dans les propriétés historiques et les portefeuilles d\'investissement à haute valeur.'
   },
   {
     name: 'Elena Rodriguez',
-    role: 'Head of Interior Design',
+    role: 'Directrice Design',
     image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    bio: 'Elena brings properties to life with her award-winning design aesthetic and attention to detail.'
+    bio: 'Elena donne vie aux intérieurs avec son esthétique primée et son souci du détail.'
   },
   {
     name: 'Michael Chen',
-    role: 'Commercial Real Estate',
+    role: 'Immobilier Commercial',
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    bio: 'Expert in commercial acquisitions and development opportunities in emerging markets.'
+    bio: 'Expert en acquisitions commerciales et opportunités de développement dans les marchés émergents.'
   }
 ];
 
@@ -33,11 +33,11 @@ export function TeamSection() {
     <section className="py-24 bg-gray-50 dark:bg-card/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">Our Experts</span>
-          <h2 className="text-3xl md:text-5xl font-bold mt-2 mb-4 text-brand-primary-navy dark:text-white">Meet The Team</h2>
+          <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">Nos Experts</span>
+          <h2 className="text-3xl md:text-5xl font-bold mt-2 mb-4 text-brand-primary-navy dark:text-white">Rencontrez l'Équipe</h2>
           <div className="w-20 h-1 bg-brand-gold mx-auto rounded-full"/>
           <p className="max-w-2xl mx-auto mt-6 text-gray-600 dark:text-gray-300">
-            A diverse group of industry leaders dedicated to delivering exceptional results for our clients.
+            Un groupe diversifié de leaders de l'industrie dédiés à fournir des résultats exceptionnels pour nos clients.
           </p>
         </div>
 

@@ -23,28 +23,28 @@ export function HeroSection() {
           transition={{ duration: 0.8 }}
         >
           <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium tracking-wider uppercase border border-white/30 rounded-full bg-white/10 backdrop-blur-sm">
-            Luxury Real Estate
+            Immobilier de Prestige
           </span>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">
-            Find Your Dream <br />
-            <span className="text-brand-gold italic">Sanctuary</span>
+            Trouvez Votre <br />
+            <span className="text-brand-gold italic">Sanctuaire de Rêve</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
-            Discover a curated collection of exclusive properties in the world's most desirable locations.
+            Découvrez une collection exclusive de propriétés dans les lieux les plus prisés du monde.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
               className="bg-brand-gold hover:bg-brand-ochre text-brand-primary-navy font-semibold px-8 py-6 text-lg rounded-full transition-all hover:scale-105"
             >
-              Explore Properties
+              Explorer les Propriétés
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
               className="bg-white/10 backdrop-blur-sm border-white/50 text-white hover:bg-white hover:text-brand-primary-navy px-8 py-6 text-lg rounded-full transition-all"
             >
-              Contact Agent
+              Contactez-nous
             </Button>
           </div>
         </motion.div>
