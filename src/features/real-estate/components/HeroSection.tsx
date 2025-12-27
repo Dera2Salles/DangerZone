@@ -8,10 +8,10 @@ export function HeroSection() {
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1600596542815-e32c21252068?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
+          backgroundImage: 'url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
         }}
       >
-        <div className="absolute inset-0 bg-brand-primary-dark/40 dark:bg-black/60 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-brand-primary-dark/60 dark:bg-black/70 mix-blend-multiply" />
         <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent" />
       </div>
 

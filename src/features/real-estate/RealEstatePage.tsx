@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { AboutSection } from './components/AboutSection';
 import { HeroSection } from './components/HeroSection';
 import { ServicesSection } from './components/ServicesSection';
+import { TeamSection } from './components/TeamSection';
 import { TestimonialsSection } from './components/TestimonialsSection';
 
 export function RealEstatePage() {
@@ -15,6 +16,7 @@ export function RealEstatePage() {
       <HeroSection />
       <ServicesSection />
       <AboutSection />
+      <TeamSection />
       <TestimonialsSection />
       
       {/* Simple Footer */}

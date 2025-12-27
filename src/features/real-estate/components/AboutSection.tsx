@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Award, ShieldCheck, Users } from 'lucide-react';
+import { Award, HeartHandshake, Leaf, ShieldCheck } from 'lucide-react';
 
 export function AboutSection() {
   return (
@@ -31,19 +31,36 @@ export function AboutSection() {
           {/* Content */}
           <div className="w-full lg:w-1/2">
             <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">About Us</span>
-            <h2 className="text-4xl lg:text-5xl font-bold mt-2 mb-6 text-brand-primary-navy dark:text-white leading-tight">
-              A Tradition of <br/> 
-              <span className="text-brand-primary">Excellence & Trust</span>
+            <h2 className="text-3xl lg:text-5xl font-bold mt-2 mb-6 text-brand-primary-navy dark:text-white leading-tight">
+              A Vision of <br/> 
+              <span className="text-brand-primary">Luxury & Harmony</span>
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-              Founded on the principles of integrity and dedicated service, our agency has established itself as the premier authority in luxury real estate. We check every detail to ensure your journey to finding the perfect home is seamless.
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed italic border-l-4 border-brand-gold pl-4">
+              "Devenir la référence incontestée de la gestion locative haut standing à Madagascar. Nous aspirons à bâtir un réseau d'hébergements d'exception, combinant innovation, qualité de services et ancrage locale."
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            <div className="grid grid-cols-1 gap-6 mb-10">
               {[
-                { icon: ShieldCheck, title: "Trusted Legal Support", text: "Comprehensive legal guidance through every step." },
-                { icon: Award, title: "Market Leaders", text: "Recognized as the top agency for 5 consecutive years." },
-                { icon: Users, title: "Client-Centric", text: "Your dreams and requirements are our sole priority." },
+                { 
+                  icon: Award, 
+                  title: "Excellence", 
+                  text: "Nous visons l’excellence dans chaque détail, de la qualité du service à l’élégance des lieux, afin de garantir une expérience à la fois haut de gamme et authentique." 
+                },
+                { 
+                  icon: ShieldCheck, 
+                  title: "Confiance", 
+                  text: "Nous construisons des relations solides et durables fondées sur la transparence, l’intégrité et le respect mutuel." 
+                },
+                { 
+                  icon: Leaf, 
+                  title: "Nature et Harmonie", 
+                  text: "Nous embrassons la nature comme une alliée essentielle : respect de l’environnement, valorisation des paysages et intégration douce dans les écosystèmes locaux." 
+                },
+                { 
+                  icon: HeartHandshake, 
+                  title: "Responsabilité", 
+                  text: "Nous promouvons un tourisme durable et responsable, respectueux de l’humain, des traditions et de l’environnement." 
+                },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4">
                   <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-brand-cream/50 flex items-center justify-center text-brand-primary-dark">
@@ -51,14 +68,14 @@ export function AboutSection() {
                   </div>
                   <div>
                     <h4 className="font-bold text-lg text-brand-primary-navy dark:text-gray-100">{item.title}</h4>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{item.text}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-snug">{item.text}</p>
                   </div>
                 </div>
               ))}
             </div>
 
             <Button size="lg" className="bg-brand-primary text-white hover:bg-brand-primary-dark rounded-full px-8">
-              Learn More About Us
+              Discover Our Work
             </Button>
           </div>
         </div>
