@@ -2,9 +2,9 @@ import { Quote } from 'lucide-react';
 
 export function FounderSection() {
   return (
-    <section className="py-24 bg-white dark:bg-card relative overflow-hidden">
+    <section className="py-24 bg-gray-50 dark:bg-card relative overflow-hidden">
       {/* Background Decorative Elements */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-brand-primary-navy/5 hidden lg:block" />
+      <div className="absolute top-0 right-0 w-full h-full bg-brand-primary-navy/5 hidden lg:block opacity-30" />
       <div className="absolute bottom-0 left-10 w-64 h-64 bg-brand-gold/10 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
