@@ -280,72 +280,82 @@ export function CreateBlogPost() {
   };
 
   return (
-    <div className="container mx-auto p-4 space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold">Créer un nouvel article</h1>
-          {!isWordPressConfigured() && (
-            <p className="text-sm text-brand-gold mt-1 flex items-center gap-1">
-              <AlertCircle className="h-4 w-4" />
-              WordPress not configured - posts will be saved locally only
-            </p>
-          )}
-          {wordpress?.isLoading && (
-            <p className="text-sm text-brand-primary mt-1 flex items-center gap-1">
-              <Loader2 className="h-4 w-4 animate-spin" />
-              Loading WordPress data...
-            </p>
-          )}
-        </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={handlePreview} disabled={isPublishing}>
-            <Eye className="h-4 w-4 mr-2" />
-            Prévisualiser
-          </Button>
-          <Button onClick={handleSubmit} disabled={isPublishing}>
-            {isPublishing ? (
-              <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Publishing...
-              </>
-            ) : (
-              <>
-                <Save className="h-4 w-4 mr-2" />
-                Publier
-              </>
+    <div className="min-h-screen bg-gray-50 dark:bg-background py-12">
+      <div className="container mx-auto px-4 max-w-7xl space-y-8">
+        
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-card p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <Badge className="bg-brand-gold/10 text-brand-gold hover:bg-brand-gold/20 border-none">Admin</Badge>
+              <span className="text-sm text-gray-500">Éditeur de Blog</span>
+            </div>
+            <h1 className="text-3xl font-bold text-brand-primary-navy dark:text-white">Créer un nouvel article</h1>
+            {!isWordPressConfigured() && (
+              <p className="text-sm text-brand-gold mt-1 flex items-center gap-1">
+                <AlertCircle className="h-4 w-4" />
+                Mode hors ligne (Sauvegarde locale uniquement)
+              </p>
             )}
-          </Button>
+          </div>
+          
+          <div className="flex gap-3">
+            <Button 
+              variant="outline" 
+              onClick={handlePreview} 
+              disabled={isPublishing}
+              className="border-gray-200 hover:bg-gray-50 text-gray-700"
+            >
+              <Eye className="h-4 w-4 mr-2" />
+              Prévisualiser
+            </Button>
+            <Button 
+              onClick={handleSubmit} 
+              disabled={isPublishing}
+              className="bg-brand-primary-navy hover:bg-brand-primary text-white min-w-[140px]"
+            >
+              {isPublishing ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Publication...
+                </>
+              ) : (
+                <>
+                  <Save className="h-4 w-4 mr-2" />
+                  Publier
+                </>
+              )}
+            </Button>
+          </div>
         </div>
-      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Colonne principale */}
         <div className="lg:col-span-2 space-y-6">
           {/* Titre */}
-          <Card>
-            <CardContent className="pt-6">
-              <Input
-                placeholder="Titre de l'article"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="text-2xl font-bold border-none focus-visible:ring-0"
-              />
-            </CardContent>
-          </Card>
+          {/* Titre */}
+          <div className="bg-white dark:bg-card p-6 rounded-2xl shadow-sm border-2 border-dashed border-gray-200 dark:border-gray-700 hover:border-brand-gold/50 focus-within:border-brand-gold focus-within:ring-4 focus-within:ring-brand-gold/10 transition-all duration-300">
+            <Label htmlFor="post-title" className="text-xs font-bold text-brand-primary uppercase tracking-widest mb-2 block">
+              Titre de l'article
+            </Label>
+            <Input
+              id="post-title"
+              placeholder="Saisissez le titre de l'article"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="text-2xl md:text-4xl font-extrabold border-none focus-visible:ring-0 bg-transparent px-0 placeholder:text-gray-300 dark:placeholder:text-gray-600 h-auto w-full text-brand-primary-navy dark:text-white"
+            />
+          </div>
 
           {/* Éditeur */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Contenu</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <BlogEditor
+          <div className="space-y-2">
+             <Label className="text-sm font-medium text-gray-500 uppercase tracking-wide ml-1">Contenu de l'article</Label>
+             <BlogEditor
                 content={content}
                 onChange={setContent}
-                placeholder="Commencez à écrire votre article ici..."
+                placeholder="Rédigez votre histoire..."
               />
-            </CardContent>
-          </Card>
+          </div>
 
           {/* Extrait */}
           <Card>
@@ -581,6 +591,7 @@ export function CreateBlogPost() {
               </div>
             </CardContent>
           </Card>
+      </div>
         </div>
       </div>
     </div>

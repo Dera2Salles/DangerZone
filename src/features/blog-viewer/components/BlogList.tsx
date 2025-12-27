@@ -43,32 +43,34 @@ export function BlogList({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-brand-mint/20 via-background to-brand-cream/20">
-      <div className="container mx-auto px-4 py-12">
+    <div className="min-h-screen bg-gray-50 dark:bg-background">
+      <div className="container mx-auto px-4 py-20">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-brand-primary to-brand-teal bg-clip-text text-transparent mb-4">
-            Blog
+        <div className="text-center mb-16">
+          <span className="text-brand-primary font-semibold tracking-wide uppercase text-sm">Journal & Actualités</span>
+          <h1 className="text-4xl md:text-6xl font-bold mt-3 mb-6 text-brand-primary-navy dark:text-white">
+            Le Blog <span className="text-brand-gold italic">Luxe Estates</span>
           </h1>
-          <p className="text-xl text-brand-primary-navy/80 dark:text-brand-mint max-w-2xl mx-auto">
-            Découvrez nos derniers articles et actualités
+          <div className="w-20 h-1 bg-brand-gold mx-auto rounded-full mb-8"/>
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-light">
+            Au cœur de l'immobilier de prestige : tendances, conseils et découvertes.
           </p>
         </div>
 
         {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-8">
-          <form onSubmit={handleSearch} className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+        <div className="max-w-2xl mx-auto mb-12">
+          <form onSubmit={handleSearch} className="relative group">
+            <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 group-focus-within:text-brand-gold transition-colors" />
             <Input
               type="text"
               placeholder="Rechercher un article..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-12 pr-4 h-14 text-lg border-2 border-brand-mint dark:border-brand-primary/30 focus:border-brand-primary dark:focus:border-brand-primary-light rounded-full shadow-lg"
+              className="pl-14 pr-32 h-16 text-lg border-2 border-gray-100 dark:border-gray-800 focus:border-brand-gold dark:focus:border-brand-gold rounded-full shadow-lg bg-white dark:bg-card transition-all"
             />
             <Button
               type="submit"
-              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full"
+              className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full px-6 bg-brand-primary-navy hover:bg-brand-primary text-white"
             >
               Rechercher
             </Button>

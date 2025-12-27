@@ -40,17 +40,17 @@ export function BlogCard({ post, onClick }: BlogCardProps) {
   return (
     <Card
       onClick={onClick}
-      className="group cursor-pointer overflow-hidden border-0 bg-gradient-to-br from-white to-brand-mint/5 dark:from-brand-primary-dark/40 dark:to-brand-primary-navy/40 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02]"
+      className="group cursor-pointer overflow-hidden border-none bg-white dark:bg-card shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
     >
       {/* Featured Image */}
       {featuredImage && (
-        <div className="relative h-48 overflow-hidden">
+        <div className="relative h-64 overflow-hidden">
           <img
             src={featuredImage}
             alt={post.title?.rendered || 'Post image'}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-brand-primary-navy/80 via-transparent to-transparent opacity-80" />
           
           {/* Categories on image */}
           {categories.length > 0 && (
@@ -58,7 +58,7 @@ export function BlogCard({ post, onClick }: BlogCardProps) {
               {categories.slice(0, 2).map((category: any) => (
                 <Badge
                   key={category.id}
-                  className="bg-brand-primary-light/90 text-white backdrop-blur-sm hover:bg-brand-primary"
+                  className="bg-white/90 text-brand-primary-navy backdrop-blur-md px-3 py-1 text-xs uppercase tracking-wider font-medium hover:bg-white"
                 >
                   {category.name}
                 </Badge>

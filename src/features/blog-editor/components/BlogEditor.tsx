@@ -350,8 +350,8 @@ function BlogEditorContent({
   return (
     <TooltipProvider>
       <div
-        className={`blog-editor-container border rounded-xl overflow-hidden bg-card shadow-lg transition-all duration-300 ${
-          isFullscreen ? 'fixed inset-0 z-50 m-0 flex flex-col' : ''
+        className={`blog-editor-container border border-gray-100 dark:border-gray-800 rounded-3xl overflow-hidden bg-white dark:bg-card shadow-2xl transition-all duration-300 ${
+          isFullscreen ? 'fixed inset-0 z-50 m-0 flex flex-col rounded-none' : ''
         }`}
       >
         <Header
