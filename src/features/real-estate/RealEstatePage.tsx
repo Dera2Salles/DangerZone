@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 import { AboutSection } from './components/AboutSection';
+import { ExperienceSection } from './components/ExperienceSection';
+import { FounderSection } from './components/FounderSection';
 import { HeroSection } from './components/HeroSection';
 import { ServicesSection } from './components/ServicesSection';
 import { TeamSection } from './components/TeamSection';
@@ -15,7 +17,9 @@ export function RealEstatePage() {
     >
       <HeroSection />
       <ServicesSection />
+      <ExperienceSection />
       <AboutSection />
+      <FounderSection />
       <TeamSection />
       <TestimonialsSection />
       
